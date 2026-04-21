@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活动数据分析界面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    <div class="sidebar-header text-center mb-4">
+                        <i class="bi bi-graph-up-arrow text-info fs-2"></i>
+                        <h5 class="text-white mt-2">活动数据分析系统</h5>
+                    </div>
+                    
+                                        <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="daily-prize-list.html">
+                                <i class="bi bi-gift-fill me-2"></i>
+                                每日活动奖品列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="false">
+                                <i class="bi bi-graph-up-arrow me-2"></i>
+                                活动效果
+                            </a>
+                            <div class="collapse" id="activityEffectiveness">
+                                <ul class="nav flex-column ps-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="daily-data.html">
+                                            <i class="bi bi-list-ul me-2"></i>
+                                            每日数据统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="activity-data.html">
+                                            <i class="bi bi-graph-up me-2"></i>
+                                            活动数据统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="reward-data.html">
+                                            <i class="bi bi-award-fill me-2"></i>
+                                            活动奖励统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="claimed-rewards.html">
+                                            <i class="bi bi-check-circle-fill me-2"></i>
+                                            已领取活动奖励统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="withdrawal-data.html">
+                                            <i class="bi bi-currency-dollar me-2"></i>
+                                            提现活动统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="cycle-statistics.html">
+                                            <i class="bi bi-calendar-fill me-2"></i>
+                                            活动周期统计
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" href="rescue-fund.html">
+                                            <i class="bi bi-heart-pulse-fill me-2"></i>
+                                            救援金活动统计
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="blacklist.html">
+                                <i class="bi bi-shield-x me-2"></i>
+                                活动黑名单
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="invitation-management.html">
+                                <i class="bi bi-people-fill me-2"></i>
+                                邀请活动管理
+                            </a>
+                        </li>
+                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 每日数据统计 -->
+                <section id="daily-data" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">每日数据统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="账号">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" placeholder="2025-12-22 - 2025-12-22">
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select" id="currency-filter">
+                                        <option value="">全部币种</option>
+                                        <option value="CNY" selected>CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="bi bi-search me-1"></i>查询
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>会员</th>
+                                            <th>是否新用户</th>
+                                            <th>(充值/加钱)次数</th>
+                                            <th>(充值/加钱)金额</th>
+                                            <th>(提现/扣钱)次数</th>
+                                            <th>(提现/扣钱)金额</th>
+                                            <th>彩票(投注/有效/输赢)金额</th>
+                                            <th>三方(投注/输赢)金额</th>
+                                            <th>币种</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2025-12-22</td>
+                                            <td>test001</td>
+                                            <td>是</td>
+                                            <td>1</td>
+                                            <td>100.00</td>
+                                            <td>0</td>
+                                            <td>0.00</td>
+                                            <td>50.00/50.00/-10.00</td>
+                                            <td>0.00/0.00</td>
+                                            <td>CNY</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-22</td>
+                                            <td>test002</td>
+                                            <td>否</td>
+                                            <td>2</td>
+                                            <td>500.00</td>
+                                            <td>1</td>
+                                            <td>200.00</td>
+                                            <td>300.00/300.00/-50.00</td>
+                                            <td>100.00/-20.00</td>
+                                            <td>CNY</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-22</td>
+                                            <td>test003</td>
+                                            <td>是</td>
+                                            <td>1</td>
+                                            <td>200.00</td>
+                                            <td>0</td>
+                                            <td>0.00</td>
+                                            <td>100.00/100.00/20.00</td>
+                                            <td>50.00/10.00</td>
+                                            <td>CNY</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-22</td>
+                                            <td>test004</td>
+                                            <td>否</td>
+                                            <td>3</td>
+                                            <td>1000.00</td>
+                                            <td>2</td>
+                                            <td>500.00</td>
+                                            <td>800.00/800.00/-100.00</td>
+                                            <td>200.00/-30.00</td>
+                                            <td>CNY</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-22</td>
+                                            <td>test005</td>
+                                            <td>是</td>
+                                            <td>1</td>
+                                            <td>300.00</td>
+                                            <td>0</td>
+                                            <td>0.00</td>
+                                            <td>150.00/150.00/30.00</td>
+                                            <td>75.00/15.00</td>
+                                            <td>CNY</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">详情</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="text-muted">
+                                    共5条记 每页 20
+                                </div>
+                                <nav>
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">上一页</a>
+                                        </li>
+                                        <li class="page-item 活跃">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动数据统计 -->
+                <section id="activity-data" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">活动数据统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="帳號">
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-select" id="activity-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="2025-12-16 ~ 2025-12-22">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="bi bi-search me-1"></i>查询
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-outline-secondary">重新统计</button>
+                                </div>
+                            </div>
+
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>會員</th>
+                                            <th>活动ID</th>
+                                            <th>子活动ID</th>
+                                            <th>活动類型</th>
+                                            <th>领取状态</th>
+                                            <th>連續天數</th>
+                                            <th>添加時間</th>
+                                            <th>修改時間</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2025-12-16</td>
+                                            <td>user001</td>
+                                            <td>ACT001</td>
+                                            <td>SUB001</td>
+                                            <td>簽到活动</td>
+                                            <td>已领取</td>
+                                            <td>7</td>
+                                            <td>2025-12-16 10:30:00</td>
+                                            <td>2025-12-16 10:30:00</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-17</td>
+                                            <td>user002</td>
+                                            <td>ACT002</td>
+                                            <td>SUB002</td>
+                                            <td>新手任務</td>
+                                            <td>已领取</td>
+                                            <td>1</td>
+                                            <td>2025-12-17 09:15:00</td>
+                                            <td>2025-12-17 09:15:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-18</td>
+                                            <td>user003</td>
+                                            <td>ACT003</td>
+                                            <td>SUB003</td>
+                                            <td>節日活动</td>
+                                            <td>未领取</td>
+                                            <td>3</td>
+                                            <td>2025-12-18 14:20:00</td>
+                                            <td>2025-12-18 14:20:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-19</td>
+                                            <td>user004</td>
+                                            <td>ACT001</td>
+                                            <td>SUB004</td>
+                                            <td>簽到活动</td>
+                                            <td>已领取</td>
+                                            <td>14</td>
+                                            <td>2025-12-19 11:45:00</td>
+                                            <td>2025-12-19 11:45:00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-12-20</td>
+                                            <td>user005</td>
+                                            <td>ACT002</td>
+                                            <td>SUB005</td>
+                                            <td>新手任務</td>
+                                            <td>已领取</td>
+                                            <td>1</td>
+                                            <td>2025-12-20 16:30:00</td>
+                                            <td>2025-12-20 16:30:00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="text-muted">
+                                    共 5 條記 每頁 20
+                                </div>
+                                <nav>
+                                    <ul class="pagination mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">上一页</a>
+                                        </li>
+                                        <li class="page-item 活跃">
+                                            <a class="page-link" href="#">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">...</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">48</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动奖励统计 -->
+                <section id="reward-data" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">活动奖励统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="reward-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>奖励类型</th>
+                                            <th>总发放量</th>
+                                            <th>价值</th>
+                                            <th>领取率</th>
+                                            <th>剩余</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>金币</td>
+                                            <td>45,678</td>
+                                            <td>15,678.90</td>
+                                            <td>87.5%</td>
+                                            <td>6,322</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>礼品卡</td>
+                                            <td>123</td>
+                                            <td>42,150.00</td>
+                                            <td>92.1%</td>
+                                            <td>11</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>优惠券</td>
+                                            <td>789</td>
+                                            <td>26,945.00</td>
+                                            <td>78.3%</td>
+                                            <td>211</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Claimed 活动奖励统计 -->
+                <section id="已领取-rewards" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">已领取活动奖励统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="已领取-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="用户ID">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>用户ID</th>
+                                            <th>奖励类型</th>
+                                            <th>数量</th>
+                                            <th>领取日期</th>
+                                            <th>状态</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>USR001</td>
+                                            <td>金币</td>
+                                            <td>100</td>
+                                            <td>2025-04-20 10:30</td>
+                                            <td><span class="badge bg-success">已领取</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR002</td>
+                                            <td>礼品卡</td>
+                                            <td>350</td>
+                                            <td>2025-04-20 09:15</td>
+                                            <td><span class="badge bg-success">已领取</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR003</td>
+                                            <td>优惠券</td>
+                                            <td>175</td>
+                                            <td>2025-04-19 16:45</td>
+                                            <td><span class="badge bg-success">已领取</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 提现活动统计 -->
+                <section id="withdrawal-data" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">提现活动统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="withdrawal-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="用户ID">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>用户ID</th>
+                                            <th>金额</th>
+                                            <th>方式</th>
+                                            <th>申请日期</th>
+                                            <th>状态</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>USR001</td>
+                                            <td>1,050.00</td>
+                                            <td>银行转账</td>
+                                            <td>2025-04-20 11:00</td>
+                                            <td><span class="badge bg-warning">处理中</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR004</td>
+                                            <td>528.50</td>
+                                            <td>支付宝</td>
+                                            <td>2025-04-20 08:30</td>
+                                            <td><span class="badge bg-success">已完成</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR005</td>
+                                            <td>1,400.00</td>
+                                            <td>银行转账</td>
+                                            <td>2025-04-19 14:20</td>
+                                            <td><span class="badge bg-danger">失败</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动黑名单 -->
+                <section id="blacklist" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">活动黑名单</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="blacklist-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="用户ID">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="2025-12-16 ~ 2025-12-22">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="bi bi-search me-1"></i>查询
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>用户ID</th>
+                                            <th>原因</th>
+                                            <th>拉黑日期</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>USR010</td>
+                                            <td>多账号</td>
+                                            <td>2025-04-15</td>
+                                            <td><span class="badge bg-danger">已封禁</span></td>
+                                            <td><button class="btn btn-sm btn-outline-primary">审核</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR011</td>
+                                            <td>欺诈行为</td>
+                                            <td>2025-04-12</td>
+                                            <td><span class="badge bg-danger">已封禁</span></td>
+                                            <td><button class="btn btn-sm btn-outline-primary">审核</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR012</td>
+                                            <td>违反条款</td>
+                                            <td>2025-04-10</td>
+                                            <td><span class="badge bg-warning">审核中</span></td>
+                                            <td><button class="btn btn-sm btn-outline-primary">审核</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动类别管理 -->
+                <section id="category-management" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">活动类别管理</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="category-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="类别">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="描述">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>类别</th>
+                                            <th>描述</th>
+                                            <th>活动数量</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>日常任务</td>
+                                            <td>常规日常活动</td>
+                                            <td>12</td>
+                                            <td><span class="badge bg-success">活跃</span></td>
+                                            <td><button class="btn btn-sm btn-outline-secondary">编辑</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>特殊活动</td>
+                                            <td>限时活动</td>
+                                            <td>5</td>
+                                            <td><span class="badge bg-success">活跃</span></td>
+                                            <td><button class="btn btn-sm btn-outline-secondary">编辑</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>推荐项目</td>
+                                            <td>邀请好友活动</td>
+                                            <td>3</td>
+                                            <td><span class="badge bg-warning">暂停</span></td>
+                                            <td><button class="btn btn-sm btn-outline-secondary">编辑</button></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 邀请活动管理 -->
+                <section id="invitation-management" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">邀请活动管理</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="invitation-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="邀请者ID">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="被邀请人数">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="成功率">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="获得奖励">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="活动日期">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>邀请者ID</th>
+                                            <th>被邀请人数</th>
+                                            <th>成功率</th>
+                                            <th>获得奖励</th>
+                                            <th>活动日期</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>USR001</td>
+                                            <td>45</td>
+                                            <td>78.9%</td>
+                                            <td>1,575.00</td>
+                                            <td>2025-04-20</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR002</td>
+                                            <td>32</td>
+                                            <td>85.2%</td>
+                                            <td>1,120.00</td>
+                                            <td>2025-04-19</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR003</td>
+                                            <td>28</td>
+                                            <td>71.4%</td>
+                                            <td>980.00</td>
+                                            <td>2025-04-18</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 活动周期统计 -->
+                <section id="cycle-statistics" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">活动周期统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="cycle-currency-filter">
+                                        <option value="" selected>全部币种</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="开始日期">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="结束日期">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="参与人数">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="完成率">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>周期名称</th>
+                                            <th>开始日期</th>
+                                            <th>结束日期</th>
+                                            <th>参与人数</th>
+                                            <th>完成率</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>春季活动</td>
+                                            <td>2025-03-01</td>
+                                            <td>2025-03-31</td>
+                                            <td>5,678</td>
+                                            <td>82.3%</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>三月疯狂</td>
+                                            <td>2025-03-15</td>
+                                            <td>2025-03-25</td>
+                                            <td>3,456</td>
+                                            <td>76.8%</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>复活节特惠</td>
+                                            <td>2025-04-01</td>
+                                            <td>2025-04-15</td>
+                                            <td>2,345</td>
+                                            <td>89.1%</td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 救援金活动统计 -->
+                <section id="rescue-fund" class="content-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">救援金活动统计</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filters -->
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <select class="form-select" id="rescue-currency-filter">
+                                        <option value="" selected>All Currencies</option>
+                                        <option value="CNY">CNY</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="用户ID">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="金额">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="原因">
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" placeholder="日期">
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary me-2">查询</button>
+                                    <button type="button" class="btn btn-outline-secondary">重置</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>用户ID</th>
+                                            <th>申请金额</th>
+                                            <th>原因</th>
+                                            <th>申请日期</th>
+                                            <th>状态</th>
+                                            <th>币种</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>USR020</td>
+                                            <td>350.00</td>
+                                            <td>账户恢复</td>
+                                            <td>2025-04-20 09:00</td>
+                                            <td><span class="badge bg-success">已批准</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR021</td>
+                                            <td>175.00</td>
+                                            <td>技术问题</td>
+                                            <td>2025-04-19 15:30</td>
+                                            <td><span class="badge bg-warning">待处理</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USR022</td>
+                                            <td>700.00</td>
+                                            <td>账户恢复</td>
+                                            <td>2025-04-18 11:45</td>
+                                            <td><span class="badge bg-danger">已拒绝</span></td>
+                                            <td>CNY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
