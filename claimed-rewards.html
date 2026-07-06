@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +8,104 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-white border-end sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <div class="sidebar-header text-center mb-4">
-                        <i class="bi bi-graph-up-arrow text-info fs-2"></i>
-                        <h5 class="text-white mt-2">活动数据分析系统</h5>
+                        <i class="bi bi-graph-up-arrow text-primary fs-2"></i>
+                        <h5 class="text-dark mt-2 fw-bold" style="font-size: 1rem;">彩票活动数据分析系统</h5>
                     </div>
                     
-                                        <ul class="nav flex-column">
+                    <ul class="nav flex-column">
+                        <!-- Group 1: 新版活動配置 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="daily-prize-list.html">
-                                <i class="bi bi-gift-fill me-2"></i>
-                                每日活动奖品列表
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#newActivityConfig" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-ticket-perforated me-2"></i>
+                                    新版活動配置
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="false">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
-                                活动效果
-                            </a>
-                            <div class="collapse" id="activityEffectiveness">
-                                <ul class="nav flex-column ps-3">
+                            <div class="collapse show" id="newActivityConfig">
+                                <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="daily-data.html">
-                                            <i class="bi bi-list-ul me-2"></i>
-                                            每日数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="index.html">活動列表管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="activity-data.html">
-                                            <i class="bi bi-graph-up me-2"></i>
-                                            活动数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">優惠碼活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="reward-data.html">
-                                            <i class="bi bi-award-fill me-2"></i>
-                                            活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="daily-prize-list.html">每日活動獎品列表</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="claimed-rewards.html">
-                                            <i class="bi bi-check-circle-fill me-2"></i>
-                                            已领取活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">派獎審核</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="withdrawal-data.html">
-                                            <i class="bi bi-currency-dollar me-2"></i>
-                                            提现活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="blacklist.html">活動黑名單</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="cycle-statistics.html">
-                                            <i class="bi bi-calendar-fill me-2"></i>
-                                            活动周期统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">提現活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="rescue-fund.html">
-                                            <i class="bi bi-heart-pulse-fill me-2"></i>
-                                            救援金活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">免費券管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="invitation-management.html">邀請活動管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動類別管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">輪播圖素材管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動素材圖管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                        
+                        <!-- Group 2: 活動效果 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="blacklist.html">
-                                <i class="bi bi-shield-x me-2"></i>
-                                活动黑名单
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-bar-chart-line me-2"></i>
+                                    活動效果
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="invitation-management.html">
-                                <i class="bi bi-people-fill me-2"></i>
-                                邀请活动管理
-                            </a>
+                            <div class="collapse show" id="activityEffectiveness">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="daily-data.html">每日數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="activity-data.html">活動數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="reward-data.html">活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4 active" href="claimed-rewards.html">已領取活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="withdrawal-data.html">提現活動統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="cycle-statistics.html">活動週期統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="rescue-fund.html">救援金活動統計</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -97,14 +113,10 @@
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2"> 已领取活动奖励统计 </h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">导出</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">打印</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Claimed 活动奖励统计 -->
@@ -114,113 +126,190 @@
                             <h5 class="card-title"> 已领取活动奖励统计 </h5>
                         </div>
                         <div class="card-body">
-                            <!-- Filters -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-2">
-                                    <select class="form-select" id="reward-currency-filter">
-                                        <option value="" selected> 全部币种 </option>
-                                        <option value="CNY"> CNY </option>
-                                        <option value="USD"> USD </option>
-                                        <option value="EUR"> EUR </option>
-                                        <option value="THB"> THB </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control" placeholder="用户ID">
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar-check"></i></span>
-                                        <input type="text" class="form-control border-start-0" id="reward-date-range" placeholder="领取日期范围">
+                            <!-- Dynamic Chart -->
+                            <div class="card p-4 border-0 shadow-sm mb-4" style="border-radius: 12px; background-color: #f8fafc;">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-graph-up text-primary me-2 fs-5"></i>
+                                        <h6 class="fw-bold mb-0 text-dark">每日已领取奖励金额趋势</h6>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-primary" id="btn-chart-week">近7天</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" id="btn-chart-month">近30天</button>
                                     </div>
                                 </div>
-                                <div class="col-md-3 d-flex">
-                                    <button type="button" class="btn btn-primary me-2 flex-grow-1">
+                                <div class="w-100 position-relative" style="height: 200px; border-bottom: 1px solid #e2e8f0; margin-bottom: 15px;">
+                                    <!-- Grid Lines -->
+                                    <div style="position: absolute; width: 100%; height: 1px; background: #e2e8f0; bottom: 25%;"></div>
+                                    <div style="position: absolute; width: 100%; height: 1px; background: #e2e8f0; bottom: 50%;"></div>
+                                    <div style="position: absolute; width: 100%; height: 1px; background: #e2e8f0; bottom: 75%;"></div>
+                                    <div style="position: absolute; width: 100%; height: 1px; background: #e2e8f0; bottom: 100%;"></div>
+                                    
+                                    <!-- Dynamic SVG Line Chart -->
+                                    <svg id="claimed-line-chart" width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0; overflow: visible;">
+                                        <!-- Line and points will be drawn by JS -->
+                                        <polyline id="claimed-trend-line" points="" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <g id="claimed-chart-points"></g>
+                                    </svg>
+
+                                    <!-- Dynamic X-Axis Labels -->
+                                    <div id="claimed-chart-labels" class="d-flex justify-content-between position-absolute w-100" style="bottom: -25px; font-size: 0.75rem; color: #64748b;">
+                                        <!-- Labels will be drawn by JS -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filters -->
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                                <div style="width: 260px;">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-calendar3"></i></span>
+                                        <input type="text" class="form-control border-start-0 ps-0" id="claimed-date-range" value="2026-06-01 ~ 2026-07-01">
+                                    </div>
+                                </div>
+                                <div style="width: 150px;">
+                                    <select class="form-select text-muted" disabled>
+                                        <option value="" selected> 活动类型 </option>
+                                    </select>
+                                </div>
+                                <div style="width: 150px;">
+                                    <select class="form-select text-muted">
+                                        <option value="" selected> 系统活动 </option>
+                                    </select>
+                                </div>
+                                <div style="width: 150px;">
+                                    <select class="form-select text-muted">
+                                        <option value="" selected> 全部 </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary px-3">
                                         <i class="bi bi-search me-1"></i> 查询
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-counterclockwise"></i>
                                     </button>
                                 </div>
                             </div>
+
+                            <div class="d-flex justify-content-end mb-2" style="font-size: 0.9rem;">
+                                <span class="fw-bold">总金额 : <span class="text-danger" id="total-claimed-amount">5,497,938</span></span>
+                            </div>
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
+                                <table class="table table-bordered table-hover align-middle text-center" style="font-size: 0.9rem;">
+                                    <thead class="table-light">
                                         <tr>
-                                            <th>用户ID</th>
-                                            <th> 奖励类型 </th>
-                                            <th>数量</th>
-                                            <th>领取日期</th>
-                                            <th>状态</th>
-                                            <th>币种</th>
+                                            <th>日期</th>
+                                            <th>活动类型</th>
+                                            <th>活动名称</th>
+                                            <th>奖品类型</th>
+                                            <th class="sortable" style="cursor: pointer; user-select: none;">
+                                                已领取活动奖励金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td> USR001 </td>
-                                            <td> 金币 </td>
-                                            <td> 100 </td>
-                                            <td> 2025-04-20 10:30 </td>
-                                            <td> <span class="badge bg-success"> 已领取 </span> </td>
-                                            <td> CNY </td>
+                                        <tr id="no-data-row" style="display: none;">
+                                            <td colspan="5" class="text-center text-muted py-5">
+                                                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                                暂无数据
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td> USR002 </td>
-                                            <td> 礼品卡 </td>
-                                            <td> 350 </td>
-                                            <td> 2025-04-20 09:15 </td>
-                                            <td> <span class="badge bg-success"> 已领取 </span> </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-10</td>
+                                            <td>注册礼金活动(新)</td>
+                                            <td>0601注册礼金</td>
+                                            <td>金额</td>
+                                            <td>2,000</td>
                                         </tr>
                                         <tr>
-                                            <td> USR003 </td>
-                                            <td> 优惠券 </td>
-                                            <td> 175 </td>
-                                            <td> 2025-04-19 16:45 </td>
-                                            <td> <span class="badge bg-success"> 已领取 </span> </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-10</td>
+                                            <td>回归活动</td>
+                                            <td>回归活动-旧版</td>
+                                            <td>金额</td>
+                                            <td>59,995</td>
                                         </tr>
                                         <tr>
-                                            <td> USR004 </td>
-                                            <td> 代金券 </td>
-                                            <td> 200 </td>
-                                            <td> 2025-04-19 11:20 </td>
-                                            <td> <span class="badge bg-success"> 已领取 </span> </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-12</td>
+                                            <td>优惠码活动(新)</td>
+                                            <td>指定会员33(D671S9ZQTG)</td>
+                                            <td>金额</td>
+                                            <td>100</td>
                                         </tr>
                                         <tr>
-                                            <td> USR005 </td>
-                                            <td> 积分 </td>
-                                            <td> 500 </td>
-                                            <td> 2025-04-18 14:30 </td>
-                                            <td> <span class="badge bg-success"> 已领取 </span> </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-12</td>
+                                            <td>活动金额调整</td>
+                                            <td>活动后台加钱</td>
+                                            <td>金额</td>
+                                            <td>40,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-28</td>
+                                            <td>下载有奖(新)</td>
+                                            <td>0615下载有奖</td>
+                                            <td>金额</td>
+                                            <td>3,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-28</td>
+                                            <td>下载有奖(新)</td>
+                                            <td>下载有奖</td>
+                                            <td>金额</td>
+                                            <td>1,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-28</td>
+                                            <td>回归活动</td>
+                                            <td>回归活动-旧版</td>
+                                            <td>金额</td>
+                                            <td>19,998</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>下载有奖(新)</td>
+                                            <td>0615下载有奖</td>
+                                            <td>金额</td>
+                                            <td>152,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>回归活动</td>
+                                            <td>回归活动-旧版</td>
+                                            <td>金额</td>
+                                            <td>59,995</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-07-01</td>
+                                            <td>下载有奖(新)</td>
+                                            <td>0615下载有奖</td>
+                                            <td>金额</td>
+                                            <td>900,000</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                             <!-- Pagination -->
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="text-muted">
-                                    5 条记录每页
-                                </div>
-                                <nav>
-                                    <ul class="pagination mb-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"> 上一页 </a>
+                            <div class="d-flex justify-content-end align-items-center gap-3 mt-4 text-secondary" style="font-size: 0.9rem;">
+                                <span>共 27 条</span>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0 align-items-center" style="--bs-pagination-border-width: 0; --bs-pagination-bg: transparent; --bs-pagination-active-bg: transparent; --bs-pagination-active-color: #0d6efd; --bs-pagination-hover-bg: transparent;">
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Previous">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </a>
                                         </li>
-                                        <li class="page-item 活跃">
-                                            <a class="page-link" href="#">1</a>
+                                        <li class="page-item active me-2">
+                                            <a class="page-link fw-bold px-2 py-0" href="#">1</a>
+                                        </li>
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-dark fw-bold px-2 py-0" href="#">2</a>
+                                        </li>
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-dark fw-bold px-2 py-0" href="#">3</a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"> 下一页 </a>
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Next">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -237,5 +326,195 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Tooltip for chart points hover
+            if (!$('#chart-tooltip').length) {
+                $('body').append('<div id="chart-tooltip" style="position: absolute; display: none; background: rgba(15, 23, 42, 0.95); color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 500; pointer-events: none; z-index: 1050; border: 1px solid #334155; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); white-space: nowrap;"></div>');
+            }
+
+            $(document).on('mouseenter', '.chart-point', function(e) {
+                var date = $(this).attr('data-date');
+                var val = parseFloat($(this).attr('data-val')) || 0;
+                var text = date + ': ' + val.toLocaleString();
+                $('#chart-tooltip').html(text).show();
+                $(this).attr('r', parseFloat($(this).attr('r')) + 2); // micro-animation: enlarge circle on hover
+            }).on('mousemove', '.chart-point', function(e) {
+                $('#chart-tooltip').css({
+                    left: (e.pageX + 12) + 'px',
+                    top: (e.pageY - 35) + 'px'
+                });
+            }).on('mouseleave', '.chart-point', function() {
+                $('#chart-tooltip').hide();
+                $(this).attr('r', parseFloat($(this).attr('r')) - 2); // restore circle radius
+            });
+
+            // Set default date to last 7 days
+            var initialEnd = moment();
+            var initialStart = moment().subtract(6, 'days');
+            $('#claimed-date-range').val(initialStart.format('YYYY-MM-DD') + ' ~ ' + initialEnd.format('YYYY-MM-DD'));
+            
+            // If daterangepicker is bound, update it
+            if ($('#claimed-date-range').data('daterangepicker')) {
+                $('#claimed-date-range').data('daterangepicker').setStartDate(initialStart);
+                $('#claimed-date-range').data('daterangepicker').setEndDate(initialEnd);
+            }
+
+            function filterTableByDateRange(start, end) {
+                var hasData = false;
+                $('tbody tr:not(#no-data-row)').each(function() {
+                    var dateStr = $(this).find('td:eq(0)').text().trim();
+                    if (!dateStr) return;
+                    
+                    var rowDate = moment(dateStr, 'YYYY-MM-DD');
+                    // Check if date is within range
+                    if (rowDate.isSameOrAfter(start, 'day') && rowDate.isSameOrBefore(end, 'day')) {
+                        $(this).show();
+                        hasData = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                
+                if (!hasData) {
+                    $('#no-data-row').show();
+                } else {
+                    $('#no-data-row').hide();
+                }
+                
+                // Redraw chart with visible rows and date range
+                updateClaimedChart(start, end);
+            }
+
+            function updateClaimedChart(start, end) {
+                if (!start || !end) return;
+
+                var $rows = $('tbody tr:visible:not(#no-data-row)');
+                var dailyData = {};
+                var totalAmount = 0;
+                
+                // 1. Generate all dates from start to end
+                var curr = moment(start);
+                var endMoment = moment(end);
+                while (curr.isSameOrBefore(endMoment, 'day')) {
+                    dailyData[curr.format('YYYY-MM-DD')] = 0;
+                    curr.add(1, 'days');
+                }
+                
+                $rows.each(function() {
+                    var dateStr = $(this).find('td:eq(0)').text().trim();
+                    var amountStr = $(this).find('td:eq(4)').text().trim();
+                    if (!dateStr || !amountStr) return;
+                    
+                    var amount = parseFloat(amountStr.replace(/,/g, '')) || 0;
+                    
+                    if (dailyData[dateStr] !== undefined) {
+                        dailyData[dateStr] += amount;
+                        totalAmount += amount;
+                    }
+                });
+                
+                // Update total amount header
+                $('#total-claimed-amount').text(totalAmount.toLocaleString());
+                
+                // Sort dates
+                var dates = Object.keys(dailyData).sort();
+                
+                if (dates.length === 0) {
+                    $('#claimed-trend-line').attr('points', '');
+                    $('#claimed-chart-points').empty();
+                    $('#claimed-chart-labels').empty();
+                    return;
+                }
+                
+                // Get max value to scale
+                var values = Object.values(dailyData);
+                var maxVal = Math.max.apply(null, values);
+                maxVal = maxVal > 0 ? maxVal * 1.1 : 100; // 10% padding
+                
+                var svgWidth = 1000;
+                var svgHeight = 200;
+                var xStep = dates.length > 1 ? svgWidth / (dates.length - 1) : svgWidth / 2;
+                
+                var points = [];
+                var circlesHtml = '';
+                var labelsHtml = '';
+                
+                // Prevent labels from overlapping if there are too many days
+                var labelInterval = dates.length > 10 ? Math.ceil(dates.length / 6) : 1;
+                
+                dates.forEach(function(date, index) {
+                    var val = dailyData[date];
+                    var x = dates.length > 1 ? index * xStep : xStep;
+                    var y = svgHeight - (val / maxVal * svgHeight);
+                    y = Math.max(0, Math.min(y, svgHeight)); // Bound check
+                    
+                    points.push(x + ',' + y);
+                    
+                    // Add point circles (smaller dots for month view)
+                    var circleRadius = dates.length > 10 ? 4 : 6;
+                    circlesHtml += '<circle class="chart-point" data-date="' + date + '" data-val="' + val + '" cx="' + x + '" cy="' + y + '" r="' + circleRadius + '" fill="#ffffff" stroke="#3b82f6" stroke-width="2.5" style="cursor: pointer; transition: r 0.1s ease;"></circle>';
+                    
+                    // Formatted labels - only show sparsely for long ranges
+                    if (index === 0 || index === dates.length - 1 || index % labelInterval === 0) {
+                        var labelDate = moment(date).format('MM-DD');
+                        var leftPos = (x / svgWidth * 100);
+                        var transform = 'translateX(-50%)';
+                        if (index === 0) transform = 'translateX(0)';
+                        if (index === dates.length - 1) transform = 'translateX(-100%)';
+                        
+                        labelsHtml += '<span style="position: absolute; left: ' + leftPos + '%; transform: ' + transform + ';">' + labelDate + '</span>';
+                    }
+                });
+                
+                $('#claimed-trend-line').attr('points', points.join(' '));
+                $('#claimed-chart-points').html(circlesHtml);
+                $('#claimed-chart-labels').html(labelsHtml);
+            }
+            
+            // Toggle buttons logic
+            $('#btn-chart-week').click(function() {
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+                $('#btn-chart-month').removeClass('btn-primary').addClass('btn-outline-primary');
+                
+                var end = moment();
+                var start = moment().subtract(6, 'days');
+                $('#claimed-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+                if ($('#claimed-date-range').data('daterangepicker')) {
+                    $('#claimed-date-range').data('daterangepicker').setStartDate(start);
+                    $('#claimed-date-range').data('daterangepicker').setEndDate(end);
+                }
+                
+                // Simulate filter & search
+                $('.btn-primary:contains("查询")').addClass('active');
+                setTimeout(function(){ $('.btn-primary:contains("查询")').removeClass('active'); }, 200);
+                
+                filterTableByDateRange(start, end);
+            });
+
+            $('#btn-chart-month').click(function() {
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+                $('#btn-chart-week').removeClass('btn-primary').addClass('btn-outline-primary');
+                
+                var end = moment();
+                var start = moment().subtract(29, 'days'); // Last 30 days
+                $('#claimed-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+                if ($('#claimed-date-range').data('daterangepicker')) {
+                    $('#claimed-date-range').data('daterangepicker').setStartDate(start);
+                    $('#claimed-date-range').data('daterangepicker').setEndDate(end);
+                }
+                
+                // Simulate filter & search
+                $('.btn-primary:contains("查询")').addClass('active');
+                setTimeout(function(){ $('.btn-primary:contains("查询")').removeClass('active'); }, 200);
+                
+                filterTableByDateRange(start, end);
+            });
+
+            // Draw chart initially based on default 7-day range
+            filterTableByDateRange(initialStart, initialEnd);
+        });
+    </script>
 </body>
+
 </html>

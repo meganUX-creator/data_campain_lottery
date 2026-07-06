@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +8,104 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-white border-end sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <div class="sidebar-header text-center mb-4">
-                        <i class="bi bi-graph-up-arrow text-info fs-2"></i>
-                        <h5 class="text-white mt-2">活动数据分析系统</h5>
+                        <i class="bi bi-graph-up-arrow text-primary fs-2"></i>
+                        <h5 class="text-dark mt-2 fw-bold" style="font-size: 1rem;">彩票活动数据分析系统</h5>
                     </div>
                     
-                                        <ul class="nav flex-column">
+                    <ul class="nav flex-column">
+                        <!-- Group 1: 新版活動配置 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="daily-prize-list.html">
-                                <i class="bi bi-gift-fill me-2"></i>
-                                每日活动奖品列表
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#newActivityConfig" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-ticket-perforated me-2"></i>
+                                    新版活動配置
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="false">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
-                                活动效果
-                            </a>
-                            <div class="collapse" id="activityEffectiveness">
-                                <ul class="nav flex-column ps-3">
+                            <div class="collapse show" id="newActivityConfig">
+                                <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="daily-data.html">
-                                            <i class="bi bi-list-ul me-2"></i>
-                                            每日数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="index.html">活動列表管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="activity-data.html">
-                                            <i class="bi bi-graph-up me-2"></i>
-                                            活动数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">優惠碼活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="reward-data.html">
-                                            <i class="bi bi-award-fill me-2"></i>
-                                            活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="daily-prize-list.html">每日活動獎品列表</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="claimed-rewards.html">
-                                            <i class="bi bi-check-circle-fill me-2"></i>
-                                            已领取活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">派獎審核</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="withdrawal-data.html">
-                                            <i class="bi bi-currency-dollar me-2"></i>
-                                            提现活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="blacklist.html">活動黑名單</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="cycle-statistics.html">
-                                            <i class="bi bi-calendar-fill me-2"></i>
-                                            活动周期统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">提現活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="rescue-fund.html">
-                                            <i class="bi bi-heart-pulse-fill me-2"></i>
-                                            救援金活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">免費券管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4 active" href="invitation-management.html">邀請活動管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動類別管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">輪播圖素材管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動素材圖管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                        
+                        <!-- Group 2: 活動效果 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="blacklist.html">
-                                <i class="bi bi-shield-x me-2"></i>
-                                活动黑名单
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-bar-chart-line me-2"></i>
+                                    活動效果
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="invitation-management.html">
-                                <i class="bi bi-people-fill me-2"></i>
-                                邀请活动管理
-                            </a>
+                            <div class="collapse show" id="activityEffectiveness">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="daily-data.html">每日數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="activity-data.html">活動數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="reward-data.html">活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="claimed-rewards.html">已領取活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="withdrawal-data.html">提現活動統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="cycle-statistics.html">活動週期統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="rescue-fund.html">救援金活動統計</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -97,14 +113,10 @@
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">邀请活动管理</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">导出</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">打印</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- 邀请活动管理 -->
@@ -114,116 +126,188 @@
                             <h5 class="card-title">邀请活动管理</h5>
                         </div>
                         <div class="card-body">
-                            <!-- Filters -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-2">
-                                    <select class="form-select" id="invitation-currency-filter">
-                                        <option value="" selected> 全部币种 </option>
-                                        <option value="CNY"> CNY </option>
-                                        <option value="USD"> USD </option>
-                                        <option value="EUR"> EUR </option>
-                                        <option value="THB"> THB </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="邀请人ID">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar-check"></i></span>
-                                        <input type="text" class="form-control border-start-0" id="invitation-date-range" placeholder="活动日期范围">
+                            <div class="mb-4">
+                                <!-- Tabs and Time Range Buttons Header -->
+                                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                                    <ul class="nav nav-pills" id="invitationChartTabs" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="people-tab" data-bs-toggle="pill" data-bs-target="#people-chart-pane" type="button" role="tab" aria-selected="true">人数</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="amount-tab" data-bs-toggle="pill" data-bs-target="#amount-chart-pane" type="button" role="tab" aria-selected="false">活动总发放金额</button>
+                                        </li>
+                                    </ul>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-primary btn-sm px-3" id="btn-chart-week">近七天</button>
+                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" id="btn-chart-month">近30天</button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="number" class="form-control" placeholder="邀请人数 ≥">
+                            
+                                <!-- Tab Contents (Charts) -->
+                                <div class="tab-content" id="invitationChartTabsContent">
+                                    <!-- People Line Chart Pane -->
+                                    <div class="tab-pane fade show active" id="people-chart-pane" role="tabpanel" tabindex="0">
+                                        <div class="position-relative w-100" style="height: 240px; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 25px 25px 45px 25px;">
+                                            <svg viewBox="0 0 1000 160" width="100%" height="160" preserveAspectRatio="none" style="overflow: visible;">
+                                                <line x1="0" y1="0%" x2="100%" y2="0%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="25%" x2="100%" y2="25%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="75%" x2="100%" y2="75%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="100%" x2="100%" y2="100%" stroke="#e2e8f0" stroke-width="1"></line>
+                                                
+                                                <polyline id="line-participate" points="" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                                <polyline id="line-register" points="" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                                <polyline id="line-valid" points="" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                                
+                                                <g id="points-participate"></g>
+                                                <g id="points-register"></g>
+                                                <g id="points-valid"></g>
+                                            </svg>
+                                            <div id="chart-x-labels-people" class="position-absolute w-100 h-100 top-0 start-0" style="pointer-events: none;"></div>
+                                        </div>
+                                        <!-- Legend placed outside the gray box -->
+                                        <div class="d-flex justify-content-center gap-4 mt-2">
+                                            <div class="d-flex align-items-center" style="font-size: 0.8rem; color: #475569;">
+                                                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #3b82f6; margin-right: 6px;"></div> 参与活动人数
+                                            </div>
+                                            <div class="d-flex align-items-center" style="font-size: 0.8rem; color: #475569;">
+                                                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #10b981; margin-right: 6px;"></div> 注册人数
+                                            </div>
+                                            <div class="d-flex align-items-center" style="font-size: 0.8rem; color: #475569;">
+                                                <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #f59e0b; margin-right: 6px;"></div> 注册有效人数
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Amount Bar Chart Pane -->
+                                    <div class="tab-pane fade" id="amount-chart-pane" role="tabpanel" tabindex="0">
+                                        <div class="position-relative w-100" style="height: 240px; background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 25px 25px 45px 25px;">
+                                            <svg viewBox="0 0 1000 160" width="100%" height="160" preserveAspectRatio="none" style="overflow: visible;">
+                                                <line x1="0" y1="0%" x2="100%" y2="0%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="25%" x2="100%" y2="25%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="50%" x2="100%" y2="50%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="75%" x2="100%" y2="75%" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,4"></line>
+                                                <line x1="0" y1="100%" x2="100%" y2="100%" stroke="#e2e8f0" stroke-width="1"></line>
+                                                <g id="bars-amount"></g>
+                                            </svg>
+                                            <div id="chart-x-labels-amount" class="position-absolute w-100 h-100 top-0 start-0" style="pointer-events: none;"></div>
+                                        </div>
+                                        <!-- Legend placed outside the gray box -->
+                                        <div class="d-flex justify-content-center gap-4 mt-2">
+                                            <div class="d-flex align-items-center" style="font-size: 0.8rem; color: #475569;">
+                                                <div style="width: 12px; height: 12px; border-radius: 2px; background-color: #8b5cf6; margin-right: 6px;"></div> 活动总发放金额
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 d-flex">
-                                    <button type="button" class="btn btn-primary me-2 flex-grow-1">
+                                <div id="chart-tooltip" style="position: fixed; display: none; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 10px; border-radius: 4px; font-size: 0.75rem; pointer-events: none; z-index: 9999; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1);"></div>
+                            </div>
+
+                            <!-- Filters -->
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div style="width: 280px;">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-calendar3"></i></span>
+                                        <input type="text" class="form-control border-start-0 ps-0" id="invitation-date-range" value="2026-06-26 ~ 2026-07-02">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary px-4 shadow-sm" style="background-color: #3b82f6; border-color: #3b82f6;">
                                         <i class="bi bi-search me-1"></i> 查询
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-counterclockwise"></i>
                                     </button>
                                 </div>
                             </div>
+
+                            <div class="d-flex justify-content-end mb-3" style="font-size: 0.9rem;">
+                                <span class="text-danger fw-bold">总参与活动人数：5，总注册有效人数：0，总活动发放金额：0</span>
+                            </div>
+
+                            <!-- Table -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
+                                <table class="table table-bordered table-hover align-middle text-center" style="font-size: 0.9rem;">
+                                    <thead class="table-light">
                                         <tr>
-                                            <th> 邀请人ID </th>
-                                            <th> 邀请人数 </th>
-                                            <th> 成功率 </th>
-                                            <th> 已获奖励 </th>
-                                            <th> 活动日期 </th>
-                                            <th>币种</th>
+                                            <th class="py-3 text-muted fw-bold">日期</th>
+                                            <th class="py-3 text-muted fw-bold">参与活动人数</th>
+                                            <th class="py-3 text-muted fw-bold">注册人数</th>
+                                            <th class="py-3 text-muted fw-bold">注册有效人数</th>
+                                            <th class="py-3 text-muted fw-bold sortable" style="cursor: pointer; user-select: none;">
+                                                活动总发放金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="color: #475569;">
                                         <tr>
-                                            <td> USR001 </td>
-                                            <td> 45 </td>
-                                            <td> 78.9% </td>
-                                            <td> 1,575.00 </td>
-                                            <td> 2025-04-20 </td>
-                                            <td> CNY </td>
+                                            <td class="py-3">2026-07-02</td>
+                                            <td>3</td>
+                                            <td>12</td>
+                                            <td>6</td>
+                                            <td>3,000</td>
+                                        </tr>
+                                        <tr class="bg-light">
+                                            <td class="py-3">2026-07-01</td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td>500</td>
                                         </tr>
                                         <tr>
-                                            <td> USR002 </td>
-                                            <td> 32 </td>
-                                            <td> 85.2% </td>
-                                            <td> 1,120.00 </td>
-                                            <td> 2025-04-19 </td>
-                                            <td> CNY </td>
+                                            <td class="py-3">2026-06-30</td>
+                                            <td>1</td>
+                                            <td>5</td>
+                                            <td>2</td>
+                                            <td>1,200</td>
+                                        </tr>
+                                        <tr class="bg-light">
+                                            <td class="py-3">2026-06-29</td>
+                                            <td>1</td>
+                                            <td>3</td>
+                                            <td>1</td>
+                                            <td>800</td>
+                                        </tr>
+                                        <tr class="bg-light">
+                                            <td class="py-3">2026-06-28</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
                                         </tr>
                                         <tr>
-                                            <td> USR003 </td>
-                                            <td> 28 </td>
-                                            <td> 71.4% </td>
-                                            <td> 980.00 </td>
-                                            <td> 2025-04-18 </td>
-                                            <td> CNY </td>
+                                            <td class="py-3">2026-06-27</td>
+                                            <td>0</td>
+                                            <td>1</td>
+                                            <td>0</td>
+                                            <td>0</td>
                                         </tr>
-                                        <tr>
-                                            <td> USR004 </td>
-                                            <td> 56 </td>
-                                            <td> 89.3% </td>
-                                            <td> 2,240.00 </td>
-                                            <td> 2025-04-17 </td>
-                                            <td> CNY </td>
-                                        </tr>
-                                        <tr>
-                                            <td> USR005 </td>
-                                            <td> 19 </td>
-                                            <td> 68.4% </td>
-                                            <td> 665.00 </td>
-                                            <td> 2025-04-16 </td>
-                                            <td> CNY </td>
+                                        <tr class="bg-light">
+                                            <td class="py-3">2026-06-26</td>
+                                            <td>2</td>
+                                            <td>8</td>
+                                            <td>4</td>
+                                            <td>2,500</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                             <!-- Pagination -->
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="text-muted">
-                                    5 条记录每页
-                                </div>
-                                <nav>
-                                    <ul class="pagination mb-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"> 上一页 </a>
+                            <div class="d-flex justify-content-end align-items-center gap-3 mt-4 text-secondary" style="font-size: 0.9rem;">
+                                <span>共 6 条</span>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0 align-items-center" style="--bs-pagination-border-width: 0; --bs-pagination-bg: transparent; --bs-pagination-active-bg: transparent; --bs-pagination-active-color: #0d6efd; --bs-pagination-hover-bg: transparent;">
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Previous">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </a>
                                         </li>
-                                        <li class="page-item 活跃">
-                                            <a class="page-link" href="#">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
+                                        <li class="page-item active me-2">
+                                            <a class="page-link fw-bold px-2 py-0" href="#">1</a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#"> 下一页 </a>
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Next">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -240,5 +324,242 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            var initialEnd = moment();
+            var initialStart = moment().subtract(6, 'days');
+            $('#invitation-date-range').val(initialStart.format('YYYY-MM-DD') + ' ~ ' + initialEnd.format('YYYY-MM-DD'));
+            
+            if ($('#invitation-date-range').data('daterangepicker')) {
+                $('#invitation-date-range').data('daterangepicker').setStartDate(initialStart);
+                $('#invitation-date-range').data('daterangepicker').setEndDate(initialEnd);
+            }
+
+            function filterTableAndChart(start, end) {
+                var hasData = false;
+                $('tbody tr').each(function() {
+                    if ($(this).attr('id') === 'no-data-row') return;
+                    
+                    var dateStr = $(this).find('td:eq(0)').text().trim();
+                    if (!dateStr) return;
+                    
+                    var rowDate = moment(dateStr, 'YYYY-MM-DD');
+                    if (rowDate.isSameOrAfter(start, 'day') && rowDate.isSameOrBefore(end, 'day')) {
+                        $(this).show();
+                        hasData = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                
+                if (!hasData) {
+                    if ($('#no-data-row').length === 0) {
+                        $('tbody').append('<tr id="no-data-row"><td colspan="5" class="text-center py-4 text-muted">暂无数据</td></tr>');
+                    }
+                    $('#no-data-row').show();
+                } else {
+                    if ($('#no-data-row').length > 0) {
+                        $('#no-data-row').hide();
+                    }
+                }
+                
+                updateCharts(start, end);
+            }
+
+            function updateCharts(start, end) {
+                if (!start || !end) return;
+
+                var $rows = $('tbody tr:visible:not(#no-data-row)');
+                
+                var dailyData = {};
+                var curr = moment(start);
+                var endMoment = moment(end);
+                while (curr.isSameOrBefore(endMoment, 'day')) {
+                    var dStr = curr.format('YYYY-MM-DD');
+                    dailyData[dStr] = { participate: 0, register: 0, valid: 0, amount: 0 };
+                    curr.add(1, 'days');
+                }
+                
+                $rows.each(function() {
+                    var dateStr = $(this).find('td:eq(0)').text().trim();
+                    var partStr = $(this).find('td:eq(1)').text().trim();
+                    var regStr = $(this).find('td:eq(2)').text().trim();
+                    var valStr = $(this).find('td:eq(3)').text().trim();
+                    var amtStr = $(this).find('td:eq(4)').text().trim();
+                    
+                    if (dailyData[dateStr] !== undefined) {
+                        dailyData[dateStr].participate += parseFloat(partStr.replace(/,/g, '')) || 0;
+                        dailyData[dateStr].register += parseFloat(regStr.replace(/,/g, '')) || 0;
+                        dailyData[dateStr].valid += parseFloat(valStr.replace(/,/g, '')) || 0;
+                        dailyData[dateStr].amount += parseFloat(amtStr.replace(/,/g, '')) || 0;
+                    }
+                });
+                
+                var dates = Object.keys(dailyData).sort();
+                
+                if (dates.length === 0) {
+                    $('#line-participate, #line-register, #line-valid').attr('points', '');
+                    $('#points-participate, #points-register, #points-valid, #chart-x-labels-people').empty();
+                    $('#bars-amount, #chart-x-labels-amount').empty();
+                    return;
+                }
+                
+                var maxPeople = 0;
+                var maxAmount = 0;
+                
+                dates.forEach(function(d) {
+                    var pMax = Math.max(dailyData[d].participate, dailyData[d].register, dailyData[d].valid);
+                    if (pMax > maxPeople) maxPeople = pMax;
+                    if (dailyData[d].amount > maxAmount) maxAmount = dailyData[d].amount;
+                });
+                
+                maxPeople = maxPeople > 0 ? maxPeople * 1.2 : 10;
+                maxAmount = maxAmount > 0 ? maxAmount * 1.2 : 100;
+                
+                var svgWidth = 1000;
+                var svgHeight = 160; 
+                var xStep = dates.length > 1 ? svgWidth / (dates.length - 1) : svgWidth / 2;
+                
+                var ptsPart = [], ptsReg = [], ptsVal = [];
+                var cirPart = '', cirReg = '', cirVal = '';
+                var labelsHtmlPeople = '';
+                
+                var barsHtml = '';
+                var labelsHtmlAmount = '';
+                
+                var labelInterval = dates.length > 10 ? Math.ceil(dates.length / 6) : 1;
+                
+                dates.forEach(function(date, index) {
+                    var xLine = dates.length > 1 ? index * xStep : xStep;
+                    var dataP = dailyData[date];
+                    
+                    // Lines (People)
+                    var yp = svgHeight - (dataP.participate / maxPeople * svgHeight);
+                    var yr = svgHeight - (dataP.register / maxPeople * svgHeight);
+                    var yv = svgHeight - (dataP.valid / maxPeople * svgHeight);
+                    
+                    yp = Math.max(0, Math.min(yp, svgHeight));
+                    yr = Math.max(0, Math.min(yr, svgHeight));
+                    yv = Math.max(0, Math.min(yv, svgHeight));
+                    
+                    ptsPart.push(xLine + ',' + yp);
+                    ptsReg.push(xLine + ',' + yr);
+                    ptsVal.push(xLine + ',' + yv);
+                    
+                    var rStr = dates.length > 10 ? '3' : '5';
+                    cirPart += '<circle cx="'+xLine+'" cy="'+yp+'" r="'+rStr+'" fill="#ffffff" stroke="#3b82f6" stroke-width="2"><title>'+date+' 参与:'+dataP.participate+'</title></circle>';
+                    cirReg += '<circle cx="'+xLine+'" cy="'+yr+'" r="'+rStr+'" fill="#ffffff" stroke="#10b981" stroke-width="2"><title>'+date+' 注册:'+dataP.register+'</title></circle>';
+                    cirVal += '<circle cx="'+xLine+'" cy="'+yv+'" r="'+rStr+'" fill="#ffffff" stroke="#f59e0b" stroke-width="2"><title>'+date+' 注册有效:'+dataP.valid+'</title></circle>';
+                    
+                    // Bars (Amount)
+                    var xBarStep = svgWidth / dates.length;
+                    var xBar = index * xBarStep;
+                    var barW = Math.max(5, xBarStep * 0.6); 
+                    var barH = (dataP.amount / maxAmount) * svgHeight;
+                    var yb = svgHeight - barH;
+                    yb = Math.max(0, Math.min(yb, svgHeight));
+                    
+                    barsHtml += '<rect x="'+(xBar + (xBarStep - barW)/2)+'" y="'+yb+'" width="'+barW+'" height="'+barH+'" fill="#8b5cf6" rx="4" ry="4"><title>'+date+' 金额:'+dataP.amount+'</title></rect>';
+                    
+                    // Labels
+                    if (index === 0 || index === dates.length - 1 || index % labelInterval === 0) {
+                        var lDate = moment(date).format('MM-DD');
+                        var leftPosLine = (xLine / svgWidth * 100);
+                        var leftPosBar = ((xBar + xBarStep/2) / svgWidth * 100);
+                        
+                        var transLine = 'translateX(-50%)';
+                        if (index === 0) transLine = 'translateX(0)';
+                        if (index === dates.length - 1) transLine = 'translateX(-100%)';
+                        
+                        labelsHtmlPeople += '<span style="position: absolute; left: '+leftPosLine+'%; transform: '+transLine+'; bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + lDate + '</span>';
+                        labelsHtmlAmount += '<span style="position: absolute; left: '+leftPosBar+'%; transform: translateX(-50%); bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + lDate + '</span>';
+                    }
+                });
+                
+                $('#line-participate').attr('points', ptsPart.join(' '));
+                $('#line-register').attr('points', ptsReg.join(' '));
+                $('#line-valid').attr('points', ptsVal.join(' '));
+                
+                $('#points-participate').html(cirPart);
+                $('#points-register').html(cirReg);
+                $('#points-valid').html(cirVal);
+                $('#chart-x-labels-people').html(labelsHtmlPeople);
+                
+                $('#bars-amount').html(barsHtml);
+                $('#chart-x-labels-amount').html(labelsHtmlAmount);
+                
+                // Update text summary
+                var tPart = 0, tVal = 0, tAmt = 0;
+                Object.keys(dailyData).forEach(function(d){
+                    tPart += dailyData[d].participate;
+                    tVal += dailyData[d].valid;
+                    tAmt += dailyData[d].amount;
+                });
+                $('.text-danger.fw-bold').text('总参与活动人数：'+tPart+'，总注册有效人数：'+tVal+'，总活动发放金额：'+tAmt);
+            }
+            
+            $('#btn-chart-week').click(function() {
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+                $('#btn-chart-month').removeClass('btn-primary').addClass('btn-outline-primary');
+                
+                var end = moment();
+                var start = moment().subtract(6, 'days');
+                $('#invitation-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+                if ($('#invitation-date-range').data('daterangepicker')) {
+                    $('#invitation-date-range').data('daterangepicker').setStartDate(start);
+                    $('#invitation-date-range').data('daterangepicker').setEndDate(end);
+                }
+                filterTableAndChart(start, end);
+            });
+
+            $('#btn-chart-month').click(function() {
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+                $('#btn-chart-week').removeClass('btn-primary').addClass('btn-outline-primary');
+                
+                var end = moment();
+                var start = moment().subtract(29, 'days');
+                $('#invitation-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
+                if ($('#invitation-date-range').data('daterangepicker')) {
+                    $('#invitation-date-range').data('daterangepicker').setStartDate(start);
+                    $('#invitation-date-range').data('daterangepicker').setEndDate(end);
+                }
+                filterTableAndChart(start, end);
+            });
+
+            // Initial load
+            filterTableAndChart(initialStart, initialEnd);
+
+            // Custom Instant HTML Tooltips on Hover
+            $(document).on('mouseenter', '#people-chart-pane circle, #amount-chart-pane rect', function(e) {
+                var title = $(this).find('title').text() || $(this).attr('data-tooltip') || '';
+                if (!title && $(this).attr('title')) {
+                    title = $(this).attr('title');
+                }
+                if (title) {
+                    $(this).data('native-title', title).removeAttr('title');
+                    $('#chart-tooltip').html(title.replace(/\n/g, '<br>')).show();
+                }
+            });
+            
+            $(document).on('mousemove', '#people-chart-pane circle, #amount-chart-pane rect', function(e) {
+                var tooltipWidth = $('#chart-tooltip').outerWidth();
+                var tooltipHeight = $('#chart-tooltip').outerHeight();
+                
+                $('#chart-tooltip').css({
+                    left: (e.clientX + 15) + 'px',
+                    top: (e.clientY - tooltipHeight - 10) + 'px'
+                });
+            });
+            
+            $(document).on('mouseleave', '#people-chart-pane circle, #amount-chart-pane rect', function() {
+                var title = $(this).data('native-title');
+                if (title) {
+                    $(this).attr('title', title);
+                }
+                $('#chart-tooltip').hide();
+            });
+        });
+    </script>
 </body>
+
 </html>

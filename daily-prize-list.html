@@ -7,89 +7,103 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-white border-end sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <div class="sidebar-header text-center mb-4">
-                        <i class="bi bi-graph-up-arrow text-info fs-2"></i>
-                        <h5 class="text-white mt-2">活动数据分析系统</h5>
+                        <i class="bi bi-graph-up-arrow text-primary fs-2"></i>
+                        <h5 class="text-dark mt-2 fw-bold" style="font-size: 1rem;">彩票活动数据分析系统</h5>
                     </div>
                     
-                                        <ul class="nav flex-column">
+                    <ul class="nav flex-column">
+                        <!-- Group 1: 新版活動配置 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="daily-prize-list.html">
-                                <i class="bi bi-gift-fill me-2"></i>
-                                每日活动奖品列表
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#newActivityConfig" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-ticket-perforated me-2"></i>
+                                    新版活動配置
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="false">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
-                                活动效果
-                            </a>
-                            <div class="collapse" id="activityEffectiveness">
-                                <ul class="nav flex-column ps-3">
+                            <div class="collapse show" id="newActivityConfig">
+                                <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="daily-data.html">
-                                            <i class="bi bi-list-ul me-2"></i>
-                                            每日数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="index.html">活動列表管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="activity-data.html">
-                                            <i class="bi bi-graph-up me-2"></i>
-                                            活动数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">優惠碼活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="reward-data.html">
-                                            <i class="bi bi-award-fill me-2"></i>
-                                            活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4 active" href="daily-prize-list.html">每日活動獎品列表</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="claimed-rewards.html">
-                                            <i class="bi bi-check-circle-fill me-2"></i>
-                                            已领取活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">派獎審核</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="withdrawal-data.html">
-                                            <i class="bi bi-currency-dollar me-2"></i>
-                                            提现活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="blacklist.html">活動黑名單</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="cycle-statistics.html">
-                                            <i class="bi bi-calendar-fill me-2"></i>
-                                            活动周期统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">提現活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="rescue-fund.html">
-                                            <i class="bi bi-heart-pulse-fill me-2"></i>
-                                            救援金活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">免費券管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="invitation-management.html">邀請活動管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動類別管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">輪播圖素材管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動素材圖管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                        
+                        <!-- Group 2: 活動效果 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="blacklist.html">
-                                <i class="bi bi-shield-x me-2"></i>
-                                活动黑名单
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-bar-chart-line me-2"></i>
+                                    活動效果
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="invitation-management.html">
-                                <i class="bi bi-people-fill me-2"></i>
-                                邀请活动管理
-                            </a>
+                            <div class="collapse show" id="activityEffectiveness">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="daily-data.html">每日數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="activity-data.html">活動數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="reward-data.html">活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="claimed-rewards.html">已領取活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="withdrawal-data.html">提現活動統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="cycle-statistics.html">活動週期統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="rescue-fund.html">救援金活動統計</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -99,12 +113,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">每日活动奖品列表</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">导出</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">打印</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Daily Activity Prize List -->
@@ -115,118 +124,108 @@
                         </div>
                         <div class="card-body">
                             <!-- Filters -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-3">
-                                    <select class="form-select" id="activity-select">
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                                <div style="width: 180px;">
+                                    <select class="form-select text-muted" id="activity-select">
                                         <option selected>全部活动</option>
                                         <option value="signin">签到活动</option>
                                         <option value="newbie">新手任务</option>
                                         <option value="holiday">节日活动</option>
                                     </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <select class="form-select" id="currency-select">
-                                        <option value="" selected>全部币种</option>
-                                        <option value="CNY">CNY</option>
-                                        <option value="USD">USD</option>
-                                        <option value="EUR">EUR</option>
-                                        <option value="THB">THB</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
+                                <div style="width: 280px;">
                                     <div class="input-group">
                                         <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar3"></i></span>
                                         <input type="text" class="form-control border-start-0" id="prize-date-range" placeholder="领取日期范围">
                                     </div>
                                 </div>
-                                <div class="col-md-3 d-flex">
-                                    <button type="button" class="btn btn-primary me-2 flex-grow-1">
-                                        <i class="bi bi-search me-1"></i> 查询
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-counterclockwise"></i>
-                                    </button>
+                                <div>
+                                    <button type="button" class="btn btn-primary px-3">查询</button>
                                 </div>
                             </div>
 
                             <!-- Table -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
-                                    <thead>
+                                <table class="table table-bordered table-hover align-middle text-center" style="font-size: 0.9rem;">
+                                    <thead class="table-light">
                                         <tr>
                                             <th>日期</th>
                                             <th>活动类型</th>
                                             <th>签到天数</th>
                                             <th>奖品名称</th>
-                                            <th>奖品</th>
-                                            <th>币种</th>
+                                            <th class="sortable text-primary" data-column="prize">
+                                                奖品
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td> 2025-12-16 </td>
-                                            <td> 签到活动 </td>
-                                            <td> 7 </td>
-                                            <td> 金币 </td>
-                                            <td> 100 </td>
-                                            <td> CNY </td>
+                                            <td>2025-12-16</td>
+                                            <td>签到活动</td>
+                                            <td>7</td>
+                                            <td>金币</td>
+                                            <td class="amount-cell">100</td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-17 </td>
-                                            <td> 新手任务 </td>
-                                            <td> 1 </td>
-                                            <td> 礼品卡 </td>
-                                            <td> 350 </td>
-                                            <td> CNY </td>
+                                            <td>2025-12-17</td>
+                                            <td>新手任务</td>
+                                            <td>1</td>
+                                            <td>礼品卡</td>
+                                            <td class="amount-cell">350</td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-18 </td>
-                                            <td> 节日活动 </td>
-                                            <td> 3 </td>
-                                            <td> 优惠券 </td>
-                                            <td> 175 </td>
-                                            <td> CNY </td>
+                                            <td>2025-12-18</td>
+                                            <td>节日活动</td>
+                                            <td>3</td>
+                                            <td>优惠券</td>
+                                            <td class="amount-cell">175</td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-19 </td>
-                                            <td> 签到活动 </td>
-                                            <td> 5 </td>
-                                            <td> 金币 </td>
-                                            <td> 200 </td>
-                                            <td> CNY </td>
+                                            <td>2025-12-19</td>
+                                            <td>签到活动</td>
+                                            <td>5</td>
+                                            <td>金币</td>
+                                            <td class="amount-cell">200</td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-20 </td>
-                                            <td> 新手任务 </td>
-                                            <td> 2 </td>
-                                            <td> 礼品卡 </td>
-                                            <td> 700 </td>
-                                            <td> CNY </td>
+                                            <td>2025-12-20</td>
+                                            <td>新手任务</td>
+                                            <td>2</td>
+                                            <td>礼品卡</td>
+                                            <td class="amount-cell">700</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                             <!-- Pagination -->
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1"> 上一页 </a>
-                                    </li>
-                                    <li class="page-item 活跃">
-                                        <a class="page-link" href="#"> 1 </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"> 2 </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"> 3 </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"> 下一页 </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <div class="d-flex justify-content-end align-items-center gap-3 mt-4 text-secondary" style="font-size: 0.9rem;">
+                                <span>共 15 条</span>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0 align-items-center" style="--bs-pagination-border-width: 0; --bs-pagination-bg: transparent; --bs-pagination-active-bg: transparent; --bs-pagination-active-color: #0d6efd; --bs-pagination-hover-bg: transparent;">
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Previous">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active me-2">
+                                            <a class="page-link fw-bold px-2 py-0" href="#">1</a>
+                                        </li>
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-dark px-2 py-0" href="#">2</a>
+                                        </li>
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-dark px-2 py-0" href="#">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Next">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </section>

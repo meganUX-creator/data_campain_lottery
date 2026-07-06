@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +8,136 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href="css/styles.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bg-success-light {
+            background-color: rgba(16, 185, 129, 0.12) !important;
+        }
+        .bg-danger-light {
+            background-color: rgba(239, 68, 68, 0.12) !important;
+        }
+        .text-success {
+            color: #10b981 !important;
+        }
+        .text-danger {
+            color: #ef4444 !important;
+        }
+        .stat-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .btn-group-sm .btn.active {
+            background-color: #3b82f6 !important;
+            color: #ffffff !important;
+        }
+        .btn-group-sm .btn:not(.active) {
+            background-color: transparent !important;
+            color: #94a3b8 !important;
+            border: none !important;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-white border-end sidebar collapse">
                 <div class="sidebar-sticky pt-3">
                     <div class="sidebar-header text-center mb-4">
-                        <i class="bi bi-graph-up-arrow text-info fs-2"></i>
-                        <h5 class="text-white mt-2">活动数据分析系统</h5>
+                        <i class="bi bi-graph-up-arrow text-primary fs-2"></i>
+                        <h5 class="text-dark mt-2 fw-bold" style="font-size: 1rem;">彩票活动数据分析系统</h5>
                     </div>
                     
-                                        <ul class="nav flex-column">
+                    <ul class="nav flex-column">
+                        <!-- Group 1: 新版活動配置 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="daily-prize-list.html">
-                                <i class="bi bi-gift-fill me-2"></i>
-                                每日活动奖品列表
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#newActivityConfig" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-ticket-perforated me-2"></i>
+                                    新版活動配置
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white dropdown-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="false">
-                                <i class="bi bi-graph-up-arrow me-2"></i>
-                                活动效果
-                            </a>
-                            <div class="collapse" id="activityEffectiveness">
-                                <ul class="nav flex-column ps-3">
+                            <div class="collapse show" id="newActivityConfig">
+                                <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="daily-data.html">
-                                            <i class="bi bi-list-ul me-2"></i>
-                                            每日数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="index.html">活動列表管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="activity-data.html">
-                                            <i class="bi bi-graph-up me-2"></i>
-                                            活动数据统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">優惠碼活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="reward-data.html">
-                                            <i class="bi bi-award-fill me-2"></i>
-                                            活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="daily-prize-list.html">每日活動獎品列表</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="claimed-rewards.html">
-                                            <i class="bi bi-check-circle-fill me-2"></i>
-                                            已领取活动奖励统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">派獎審核</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="withdrawal-data.html">
-                                            <i class="bi bi-currency-dollar me-2"></i>
-                                            提现活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="blacklist.html">活動黑名單</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="cycle-statistics.html">
-                                            <i class="bi bi-calendar-fill me-2"></i>
-                                            活动周期统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">提現活動管理</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="rescue-fund.html">
-                                            <i class="bi bi-heart-pulse-fill me-2"></i>
-                                            救援金活动统计
-                                        </a>
+                                        <a class="nav-link ps-4" href="#">免費券管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="invitation-management.html">邀請活動管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動類別管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">輪播圖素材管理</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="#">活動素材圖管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
+                        
+                        <!-- Group 2: 活動效果 -->
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="blacklist.html">
-                                <i class="bi bi-shield-x me-2"></i>
-                                活动黑名单
+                            <a class="nav-link sidebar-group-header d-flex justify-content-between align-items-center" href="#" data-bs-toggle="collapse" data-bs-target="#activityEffectiveness" aria-expanded="true">
+                                <span>
+                                    <i class="bi bi-bar-chart-line me-2"></i>
+                                    活動效果
+                                </span>
+                                <i class="bi bi-chevron-up" style="font-size: 0.8rem;"></i>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="invitation-management.html">
-                                <i class="bi bi-people-fill me-2"></i>
-                                邀请活动管理
-                            </a>
+                            <div class="collapse show" id="activityEffectiveness">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4 active" href="daily-data.html">每日數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="activity-data.html">活動數據統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="reward-data.html">活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="claimed-rewards.html">已領取活動獎勵統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="withdrawal-data.html">提現活動統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="cycle-statistics.html">活動週期統計</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link ps-4" href="rescue-fund.html">救援金活動統計</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -97,14 +145,10 @@
 
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2"> 每日数据统计 </h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">导出</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">打印</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- 每日数据统计 -->
@@ -114,118 +158,390 @@
                             <h5 class="card-title"> 每日数据统计 </h5>
                         </div>
                         <div class="card-body">
-                            <!-- Filters -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-md-2">
-                                    <input type="text" class="form-control" placeholder="账号">
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select" id="daily-currency-filter">
-                                        <option value=""> 全部币种 </option>
-                                        <option value="CNY" selected> CNY </option>
-                                        <option value="USD"> USD </option>
-                                        <option value="EUR"> EUR </option>
-                                        <option value="THB"> THB </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar3"></i></span>
-                                        <input type="text" class="form-control border-start-0" id="daily-date-range" placeholder="统计日期范围">
+                            <!-- Interactive Visualization Dashboard (Dark themed) -->
+                            <div class="dashboard-container p-4 mb-4" style="position: relative; background-color: #0b0f19; border-radius: 16px; color: #f8fafc;">
+                                <!-- Dashboard Loading Overlay -->
+                                <div id="dashboard-loading" class="d-flex justify-content-center align-items-center" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(11, 15, 25, 0.85); z-index: 100; border-radius: 16px; transition: opacity 0.3s ease; pointer-events: none; opacity: 0;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="spinner-border text-primary mb-2" role="status" style="width: 2.5rem; height: 2.5rem;"></div>
+                                        <span class="text-secondary" style="font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;">正在加載數據...</span>
                                     </div>
                                 </div>
-                                <div class="col-md-5 d-flex">
-                                    <button type="button" class="btn btn-primary me-2 flex-grow-1">
-                                        <i class="bi bi-search me-1"></i> 查询
-                                    </button>
-                                    <button type="button" class="btn btn-warning me-2 text-dark" data-bs-toggle="modal" data-bs-target="#recalcModal">
-                                        <i class="bi bi-arrow-repeat me-1"></i> 重新统计
-                                    </button>
-                                    <button type="button" class="btn btn-outline-secondary">
-                                        <i class="bi bi-arrow-counterclockwise"></i>
-                                    </button>
+                                <!-- Dashboard Header -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="fw-bold mb-0 text-white" style="font-size: 1.1rem;">每日數據大盤</h5>
+                                    <div class="btn-group btn-group-sm" role="group" id="dashboard-range-selector" style="background-color: #1e293b; border-radius: 6px; padding: 2px;">
+                                        <button type="button" class="btn btn-sm text-white active px-3" data-range="7days" style="border-radius: 4px; font-size: 0.75rem;">近7天</button>
+                                        <button type="button" class="btn btn-sm text-secondary px-3" data-range="30days" style="border-radius: 4px; font-size: 0.75rem;">近30天</button>
+                                    </div>
+                                </div>
+                                <!-- Row 1: Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <!-- Card 5: 總充值 (含加錢) -->
+                                    <div class="col-6 col-md-4 col-lg">
+                                        <div class="stat-card p-3" style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 130px; position: relative;">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">總充值 (含加錢)</span>
+                                                <span id="card-dep-badge" class="badge bg-success-light text-success" style="font-size: 0.7rem; padding: 2px 6px;">▲ 0.0%</span>
+                                            </div>
+                                            <div class="mt-2" style="font-size: 1.25rem; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="card-dep-val">0</div>
+                                            <div style="position: absolute; bottom: 8px; left: 12px; right: 12px; height: 35px;">
+                                                <canvas id="spark-dep" style="width: 100%; height: 100%;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card 6: 總提現 (含扣錢) -->
+                                    <div class="col-6 col-md-4 col-lg">
+                                        <div class="stat-card p-3" style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 130px; position: relative;">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">總提現 (含扣錢)</span>
+                                                <span id="card-with-badge" class="badge bg-danger-light text-danger" style="font-size: 0.7rem; padding: 2px 6px;">▼ 0.0%</span>
+                                            </div>
+                                            <div class="mt-2" style="font-size: 1.25rem; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="card-with-val">0</div>
+                                            <div style="position: absolute; bottom: 8px; left: 12px; right: 12px; height: 35px;">
+                                                <canvas id="spark-with" style="width: 100%; height: 100%;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card 4: 新增用戶數 -->
+                                    <div class="col-6 col-md-4 col-lg">
+                                        <div class="stat-card p-3" style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 130px; position: relative;">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">新增用戶數</span>
+                                                <span id="card-users-badge" class="badge bg-danger-light text-danger" style="font-size: 0.7rem; padding: 2px 6px;">▼ 0.0%</span>
+                                            </div>
+                                            <div class="mt-2" style="font-size: 1.25rem; font-weight: 700; color: #ffffff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="card-users-val">0</div>
+                                            <div style="position: absolute; bottom: 8px; left: 12px; right: 12px; height: 35px;">
+                                                <canvas id="spark-users" style="width: 100%; height: 100%;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card 2: 彩票平台盈虧 -->
+                                    <div class="col-6 col-md-4 col-lg">
+                                        <div class="stat-card p-3" style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 130px; position: relative;">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">彩票平台盈虧</span>
+                                                <span id="card-lottery-badge" class="badge bg-success-light text-success" style="font-size: 0.7rem; padding: 2px 6px;">▲ 0.0%</span>
+                                            </div>
+                                            <div class="mt-2" style="font-size: 1.25rem; font-weight: 700; color: #10b981; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="card-lottery-val">+0</div>
+                                            <div style="position: absolute; bottom: 8px; left: 12px; right: 12px; height: 35px;">
+                                                <canvas id="spark-lottery" style="width: 100%; height: 100%;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card 3: 三方平台盈虧 -->
+                                    <div class="col-6 col-md-4 col-lg">
+                                        <div class="stat-card p-3" style="background-color: #111827; border: 1px solid #1f2937; border-radius: 12px; height: 130px; position: relative;">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 500;">三方平台盈虧</span>
+                                                <span id="card-third-badge" class="badge bg-success-light text-success" style="font-size: 0.7rem; padding: 2px 6px;">▲ 0.0%</span>
+                                            </div>
+                                            <div class="mt-2" style="font-size: 1.25rem; font-weight: 700; color: #10b981; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="card-third-val">+0</div>
+                                            <div style="position: absolute; bottom: 8px; left: 12px; right: 12px; height: 35px;">
+                                                <canvas id="spark-third" style="width: 100%; height: 100%;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Row 2: 大盤趨勢總覽 -->
+                                <div class="card p-4 border-0 mb-4" style="background-color: #111625; border-radius: 12px;">
+                                    <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+                                        <div>
+                                            <h6 class="fw-bold mb-1 text-white">大盤趨勢總覽</h6>
+                                            <div id="trend-time-subtitle" style="font-size: 0.75rem; color: #94a3b8;">按日展示 · 共7天</div>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <!-- Custom Legends -->
+                                            <div class="d-flex gap-2" id="trend-legend-container">
+                                                <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-lottery" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #10b981;">
+                                                    <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span>
+                                                    <span class="legend-text">彩票投注</span>
+                                                </button>
+                                                <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-third" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #fb8c00;">
+                                                    <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #fb8c00; display: inline-block;"></span>
+                                                    <span class="legend-text">三方投注</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="height: 280px; width: 100%;">
+                                        <canvas id="market-trend-chart"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Row 3: Sub Charts -->
+                                <div class="row g-3">
+                                    <!-- Sub Chart Left: 充值 / 提現對比 -->
+                                    <div class="col-md-6">
+                                        <div class="card p-4 border-0 h-100" style="background-color: #111625; border-radius: 12px;">
+                                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1 text-white">充值 / 提現對比</h6>
+                                                    <div id="compare-time-subtitle" style="font-size: 0.75rem; color: #94a3b8;">按日展示，共7天</div>
+                                                </div>
+                                                <!-- Toggle Switch Group -->
+                                                <div class="btn-group btn-group-sm" role="group" style="background-color: #1e293b; border-radius: 6px; padding: 2px;">
+                                                    <button type="button" class="btn btn-sm text-white px-3 active" id="toggle-compare-amt" style="border-radius: 4px; font-size: 0.75rem;">金額</button>
+                                                    <button type="button" class="btn btn-sm text-secondary px-3" id="toggle-compare-count" style="border-radius: 4px; font-size: 0.75rem;">次數</button>
+                                                </div>
+                                            </div>
+                                            <div style="height: 220px; width: 100%;">
+                                                <canvas id="dep-with-compare-chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Sub Chart Right: 新增用戶趨勢 -->
+                                    <div class="col-md-6">
+                                        <div class="card p-4 border-0 h-100" style="background-color: #111625; border-radius: 12px;">
+                                            <div>
+                                                <h6 class="fw-bold mb-1 text-white">新增用戶趨勢</h6>
+                                                <div id="new-users-subtitle" style="font-size: 0.75rem; color: #94a3b8;">累計 0 位新用戶</div>
+                                            </div>
+                                            <div class="mt-3" style="height: 220px; width: 100%;">
+                                                <canvas id="new-users-trend-chart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
+                            <!-- Filters -->
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                                <div style="width: 160px;">
+                                    <input type="text" class="form-control" placeholder="账号">
+                                </div>
+                                <div style="width: 280px;">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0 text-muted"><i
+                                                class="bi bi-calendar3"></i></span>
+                                        <input type="text" class="form-control border-start-0 text-center" id="daily-date-range"
+                                            value="2026-06-25 ~ 2026-07-01" placeholder="统计日期范围">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary px-3">
+                                        <i class="bi bi-search me-1"></i>查询
+                                    </button>
+                                </div>
+                                <div class="ms-auto">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recalcModal">
+                                        重新统计
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <!-- Table -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-bordered table-hover align-middle text-center" style="font-size: 0.9rem;">
                                     <thead>
                                         <tr>
                                             <th>日期</th>
-                                            <th> 用户数量 </th>
-                                            <th> 活动数量 </th>
-                                            <th> 总奖励 </th>
-                                            <th> 完成率 </th>
-                                            <th>币种</th>
+                                            <th>会员</th>
+                                            <th>是否新用户</th>
+                                            <th>(充值/加钱)次数</th>
+                                            <th class="sortable" style="cursor: pointer; user-select: none;">
+                                                (充值/加钱)金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
+                                            <th>(提现/扣钱)次数</th>
+                                            <th class="sortable" style="cursor: pointer; user-select: none;">
+                                                (提现/扣钱)金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
+                                            <th class="sortable" style="cursor: pointer; user-select: none;">
+                                                彩票(投注/有效/输赢)金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
+                                            <th class="sortable" style="cursor: pointer; user-select: none;">
+                                                三方(投注/输赢)金额
+                                                <i class="bi bi-arrow-down-up text-muted ms-1" style="font-size: 0.8rem; display: inline-block; transform: scaleX(-1); vertical-align: middle;"></i>
+                                            </th>
+                                            <th style="min-width: 150px;">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td> 2025-12-22 </td>
-                                            <td> 12,345 </td>
-                                            <td> 8,901 </td>
-                                            <td> 45,678.90 </td>
-                                            <td> 72.1% </td>
-                                            <td> CNY </td>
+                                        <!-- No Data Row -->
+                                        <tr id="no-data-row" style="display: none;">
+                                            <td colspan="10" class="text-center py-5 text-muted">
+                                                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                                <span>暂无数据</span>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-21 </td>
-                                            <td> 11,234 </td>
-                                            <td> 7,890 </td>
-                                            <td> 42,150.00 </td>
-                                            <td> 70.2% </td>
-                                            <td> CNY </td>
+                                            <td>2026-07-01</td>
+                                            <td>albertvn01</td>
+                                            <td>否</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 1</td>
+                                            <td>2,000 / 2,000</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-20 </td>
-                                            <td> 10,123 </td>
-                                            <td> 6,789 </td>
-                                            <td> 38,621.10 </td>
-                                            <td> 67.1% </td>
-                                            <td> CNY </td>
+                                            <td>2026-07-01</td>
+                                            <td>quan2166</td>
+                                            <td>是</td>
+                                            <td>0 / 1</td>
+                                            <td>0 / 24,305,000</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-19 </td>
-                                            <td> 9,012 </td>
-                                            <td> 5,678 </td>
-                                            <td> 35,092.20 </td>
-                                            <td> 63.0% </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-30</td>
+                                            <td>raa002</td>
+                                            <td>否</td>
+                                            <td>0 / 1</td>
+                                            <td>0 / 2,000,000</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>621,000 / 621,000 / -123,500</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td> 2025-12-18 </td>
-                                            <td> 8,901 </td>
-                                            <td> 4,567 </td>
-                                            <td> 31,563.30 </td>
-                                            <td> 51.3% </td>
-                                            <td> CNY </td>
+                                            <td>2026-06-30</td>
+                                            <td>kevintest14</td>
+                                            <td>否</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>1,000,000 / -1,000,000</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>yuri01</td>
+                                            <td>否</td>
+                                            <td>1 / 0</td>
+                                            <td>30,000 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>110,000 / -110,000</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>rpp003</td>
+                                            <td>是</td>
+                                            <td>0 / 1</td>
+                                            <td>0 / 1,000,000</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>james54321</td>
+                                            <td>否</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>1,000 / 1,000 / -1,000</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>rpp002</td>
+                                            <td>否</td>
+                                            <td>0 / 1</td>
+                                            <td>0 / 1,000,000</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>yuri02</td>
+                                            <td>否</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>1 / 0</td>
+                                            <td>3,000 / 0</td>
+                                            <td>231,000 / 231,000 / -31,710</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2026-06-30</td>
+                                            <td>albertvn01</td>
+                                            <td>否</td>
+                                            <td>0 / 1</td>
+                                            <td>0 / 3,000</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>0 / 0 / 0</td>
+                                            <td>0 / 0</td>
+                                            <td>
+                                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                                <a href="#" class="text-decoration-none">三方详情</a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                             <!-- Pagination -->
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="text-muted">
-                                    5 条记录每页
-                                </div>
-                                <nav>
-                                    <ul class="pagination mb-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1"> 上一页 </a>
+                            <div class="d-flex justify-content-end align-items-center gap-3 mt-4 text-secondary" style="font-size: 0.9rem;">
+                                <span>共 40 条</span>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm mb-0 align-items-center" style="--bs-pagination-border-width: 0; --bs-pagination-bg: transparent; --bs-pagination-active-bg: transparent; --bs-pagination-active-color: #0d6efd; --bs-pagination-hover-bg: transparent;">
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Previous">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </a>
                                         </li>
-                                        <li class="page-item 活跃">
-                                            <a class="page-link" href="#">1</a>
+                                        <li class="page-item active me-2">
+                                            <a class="page-link fw-bold px-2 py-0" href="#">1</a>
                                         </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">3</a>
+                                        <li class="page-item me-2">
+                                            <a class="page-link text-secondary px-2 py-0" href="#">2</a>
                                         </li>
                                         <li class="page-item">
-                                            <a class="page-link" href="#"> 下一页 </a>
+                                            <a class="page-link text-secondary p-0" href="#" aria-label="Next">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -252,7 +568,8 @@
                             </label>
                             <div class="col-sm-9">
                                 <div class="input-group">
-                                    <span class="input-group-text bg-white border-end-0"><i class="bi bi-calendar-event"></i></span>
+                                    <span class="input-group-text bg-white border-end-0"><i
+                                            class="bi bi-calendar-event"></i></span>
                                     <input type="date" class="form-control border-start-0" value="2026-04-20">
                                 </div>
                             </div>
@@ -272,5 +589,890 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Helper function at the top (using moment)
+            function getPastDateString(daysAgo) {
+                return moment("2026-07-01", "YYYY-MM-DD").subtract(daysAgo, 'days').format("YYYY-MM-DD");
+            }
+
+            // 1. Prepare Mock Data (from 2026-06-02 to 2026-07-01)
+            let dataList = [
+                // 2026-07-01
+                { date: '2026-07-01', member: 'albertvn01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 1, withAmt: 2000, withManualAmt: 450000, lotteryBet: 10000, lotteryValid: 10000, lotteryWinLoss: -2000, thirdpartyBet: 50000, thirdpartyWinLoss: -5000 },
+                { date: '2026-07-01', member: 'quan2166', isNew: true, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 24305000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 30000, lotteryValid: 30000, lotteryWinLoss: -3000, thirdpartyBet: 100000, thirdpartyWinLoss: -8000 },
+                
+                // 2026-06-30
+                { date: '2026-06-30', member: 'raa002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 2000000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 621000, lotteryValid: 621000, lotteryWinLoss: -91290, thirdpartyBet: 500000, thirdpartyWinLoss: -50000 },
+                { date: '2026-06-30', member: 'kevintest14', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 200000, lotteryValid: 200000, lotteryWinLoss: -25000, thirdpartyBet: 1000000, thirdpartyWinLoss: -1107000 },
+                { date: '2026-06-30', member: 'yuri01', isNew: false, depTimes: 1, depManualTimes: 0, depAmt: 30000, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 150000, lotteryValid: 150000, lotteryWinLoss: -12000, thirdpartyBet: 110000, thirdpartyWinLoss: -110000 },
+                { date: '2026-06-30', member: 'rpp003', isNew: true, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 1000000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 40000, lotteryValid: 40000, lotteryWinLoss: -4000, thirdpartyBet: 80000, thirdpartyWinLoss: -6000 },
+                { date: '2026-06-30', member: 'james54321', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 1000, lotteryValid: 1000, lotteryWinLoss: -1000, thirdpartyBet: 20000, thirdpartyWinLoss: -2000 },
+                { date: '2026-06-30', member: 'rpp002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 1000000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: -5000, thirdpartyBet: 90000, thirdpartyWinLoss: -7000 },
+                { date: '2026-06-30', member: 'yuri02', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 1, withManualTimes: 0, withAmt: 850000, withManualAmt: 0, lotteryBet: 231000, lotteryValid: 231000, lotteryWinLoss: -31710, thirdpartyBet: 400000, thirdpartyWinLoss: -40000 },
+                { date: '2026-06-30', member: 'albertvn01', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 3000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 8000, lotteryValid: 8000, lotteryWinLoss: -800, thirdpartyBet: 15000, thirdpartyWinLoss: -1500 },
+                
+                // 2026-06-29
+                { date: '2026-06-29', member: 'raa002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 2500000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 100000, lotteryValid: 100000, lotteryWinLoss: 14388, thirdpartyBet: 200000, thirdpartyWinLoss: -150000 },
+                { date: '2026-06-29', member: 'yuri01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 1, withManualTimes: 0, withAmt: 1200000, withManualAmt: 0, lotteryBet: 80000, lotteryValid: 80000, lotteryWinLoss: -8000, thirdpartyBet: 120000, thirdpartyWinLoss: -10000 },
+                
+                // 2026-06-28
+                { date: '2026-06-28', member: 'newbie01', isNew: true, depTimes: 1, depManualTimes: 0, depAmt: 1800000, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: -4000, thirdpartyBet: 100000, thirdpartyWinLoss: -8000 },
+                { date: '2026-06-28', member: 'albertvn01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 1, withAmt: 950000, withManualAmt: 950000, lotteryBet: 90000, lotteryValid: 90000, lotteryWinLoss: -9000, thirdpartyBet: 180000, thirdpartyWinLoss: -18000 },
+                
+                // 2026-06-27
+                { date: '2026-06-27', member: 'raa002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 3200000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 120000, lotteryValid: 120000, lotteryWinLoss: 2056, thirdpartyBet: 300000, thirdpartyWinLoss: -143000 },
+                { date: '2026-06-27', member: 'james54321', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 1, withAmt: 600000, withManualAmt: 600000, lotteryBet: 70000, lotteryValid: 70000, lotteryWinLoss: -7000, thirdpartyBet: 140000, thirdpartyWinLoss: -14000 },
+                
+                // 2026-06-26
+                { date: '2026-06-26', member: 'user_0626', isNew: true, depTimes: 1, depManualTimes: 0, depAmt: 1500000, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 40000, lotteryValid: 40000, lotteryWinLoss: -8311, thirdpartyBet: 200000, thirdpartyWinLoss: -10000 },
+                { date: '2026-06-26', member: 'albertvn01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 1, withAmt: 750000, withManualAmt: 750000, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: -5000, thirdpartyBet: 110000, thirdpartyWinLoss: -11000 },
+                
+                // 2026-06-25
+                { date: '2026-06-25', member: 'raa002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 1473000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 80000, lotteryValid: 80000, lotteryWinLoss: -744, thirdpartyBet: 500000, thirdpartyWinLoss: -396691 },
+                { date: '2026-06-25', member: 'yuri02', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 1, withManualTimes: 0, withAmt: 1100000, withManualAmt: 0, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: -5000, thirdpartyBet: 100000, thirdpartyWinLoss: -10000 }
+            ];
+
+            // June 18 to June 24 (previous 7-day period for metrics badge baseline)
+            let prevPeriodData = [
+                { dateAgo: 7, member: 'rpp001', isNew: true, depAmt: 1000000, withAmt: 30000, lotteryWinLoss: -1000, thirdpartyWinLoss: -20000 },
+                { dateAgo: 7, member: 'raa002', isNew: false, depAmt: 0, withAmt: 0, lotteryWinLoss: 2000, thirdpartyWinLoss: -10000 },
+                
+                { dateAgo: 8, member: 'yuri01', isNew: true, depAmt: 900000, withAmt: 25000, lotteryWinLoss: -1500, thirdpartyWinLoss: -15000 },
+                { dateAgo: 8, member: 'quan2166', isNew: false, depAmt: 0, withAmt: 0, lotteryWinLoss: -3000, thirdpartyWinLoss: 5000 },
+                
+                { dateAgo: 9, member: 'kevintest14', isNew: true, depAmt: 1200000, withAmt: 50000, lotteryWinLoss: 3000, thirdpartyWinLoss: -25000 },
+                { dateAgo: 9, member: 'rpp002', isNew: true, depAmt: 0, withAmt: 0, lotteryWinLoss: -4000, thirdpartyWinLoss: -12000 },
+                
+                { dateAgo: 10, member: 'newbie02', isNew: true, depAmt: 800000, withAmt: 45000, lotteryWinLoss: -2500, thirdpartyWinLoss: -18000 },
+                { dateAgo: 10, member: 'albertvn01', isNew: false, depAmt: 0, withAmt: 0, lotteryWinLoss: -5000, thirdpartyWinLoss: -15000 },
+                
+                { dateAgo: 11, member: 'user_prev5', isNew: true, depAmt: 750000, withAmt: 35000, lotteryWinLoss: -1200, thirdpartyWinLoss: -12000 },
+                { dateAgo: 11, member: 'raa002', isNew: false, depAmt: 0, withAmt: 0, lotteryWinLoss: -6000, thirdpartyWinLoss: -18000 },
+                
+                { dateAgo: 12, member: 'user_prev6', isNew: true, depAmt: 950000, withAmt: 42000, lotteryWinLoss: -4000, thirdpartyWinLoss: -20000 },
+                
+                { dateAgo: 13, member: 'user_prev7', isNew: true, depAmt: 660848, withAmt: 42750, lotteryWinLoss: -795, thirdpartyWinLoss: -7832 }
+            ];
+
+            prevPeriodData.forEach(item => {
+                let dateStr = getPastDateString(item.dateAgo);
+                dataList.push({
+                    date: dateStr,
+                    member: item.member,
+                    isNew: item.isNew,
+                    depTimes: item.depAmt > 0 ? 1 : 0,
+                    depManualTimes: 0,
+                    depAmt: item.depAmt,
+                    depManualAmt: 0,
+                    withTimes: item.withAmt > 0 ? 1 : 0,
+                    withManualTimes: 0,
+                    withAmt: item.withAmt,
+                    withManualAmt: 0,
+                    lotteryBet: item.lotteryWinLoss !== 0 ? Math.abs(item.lotteryWinLoss) * 5 : 0,
+                    lotteryValid: item.lotteryWinLoss !== 0 ? Math.abs(item.lotteryWinLoss) * 5 : 0,
+                    lotteryWinLoss: item.lotteryWinLoss,
+                    thirdpartyBet: item.thirdpartyWinLoss !== 0 ? Math.abs(item.thirdpartyWinLoss) * 4 : 0,
+                    thirdpartyWinLoss: item.thirdpartyWinLoss
+                });
+            });
+
+            // June 2 to June 17 (older data up to 30 days)
+            for (let day = 14; day <= 29; day++) {
+                let dateStr = getPastDateString(day);
+                let numUsersToday = (day % 4 === 0) ? 2 : ((day % 3 === 0) ? 1 : 0);
+                
+                for (let u = 0; u < 2; u++) {
+                    let memberName = `user_day_${day}_${u}`;
+                    let isNewUser = (u === 0 && numUsersToday > 0);
+                    let dep = Math.floor(500000 + Math.random() * 800000);
+                    let wit = Math.floor(20000 + Math.random() * 30000);
+                    let lotWin = Math.floor(-10000 + Math.random() * 8000);
+                    let thirdWin = Math.floor(-50000 + Math.random() * 40000);
+                    
+                    dataList.push({
+                        date: dateStr,
+                        member: memberName,
+                        isNew: isNewUser,
+                        depTimes: 1,
+                        depManualTimes: 0,
+                        depAmt: dep,
+                        depManualAmt: 0,
+                        withTimes: 1,
+                        withManualTimes: 0,
+                        withAmt: wit,
+                        withManualAmt: 0,
+                        lotteryBet: Math.abs(lotWin) * 5,
+                        lotteryValid: Math.abs(lotWin) * 5,
+                        lotteryWinLoss: lotWin,
+                        thirdpartyBet: Math.abs(thirdWin) * 4,
+                        thirdpartyWinLoss: thirdWin
+                    });
+                }
+            }
+
+            // Sort master dataset by date descending, then member ascending
+            dataList.sort((a, b) => {
+                if (a.date !== b.date) {
+                    return b.date.localeCompare(a.date);
+                }
+                return a.member.localeCompare(b.member);
+            });
+
+            // 2. Global State Variables
+            let currentPage = 1;
+            const pageSize = 10;
+            let activeCompareType = 'amount'; // 'amount' or 'count'
+            let activeTrendMetric = 'bet'; // 'bet' or 'winloss'
+            let filteredList = [];
+
+            // Global Chart instances
+            let sparkChartInstances = {};
+            let marketTrendChart = null;
+            let depWithCompareChart = null;
+            let newUsersTrendChart = null;
+
+            // 3. Render functions
+            function renderTableAndPagination() {
+                let $tbody = $('tbody');
+                $tbody.empty();
+                $('#no-data-row').hide();
+
+                if (filteredList.length === 0) {
+                    $('#no-data-row').show().appendTo($tbody);
+                    $('.pagination').empty();
+                    $('.pagination').closest('div').find('span').text('共 0 条');
+                    return;
+                }
+
+                let startIdx = (currentPage - 1) * pageSize;
+                let endIdx = Math.min(startIdx + pageSize, filteredList.length);
+                let pageData = filteredList.slice(startIdx, endIdx);
+
+                pageData.forEach(item => {
+                    let rowHtml = `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td>${item.member}</td>
+                            <td>${item.isNew ? '<span class="badge bg-success">是</span>' : '否'}</td>
+                            <td>${(item.depTimes || 0)} / ${(item.depManualTimes || 0)}</td>
+                            <td class="amount-cell text-end">${(item.depAmt || 0).toLocaleString()} / ${(item.depManualAmt || 0).toLocaleString()}</td>
+                            <td>${(item.withTimes || 0)} / ${(item.withManualTimes || 0)}</td>
+                            <td class="amount-cell text-end">${(item.withAmt || 0).toLocaleString()} / ${(item.withManualAmt || 0).toLocaleString()}</td>
+                            <td class="amount-cell text-end">${(item.lotteryBet || 0).toLocaleString()} / ${(item.lotteryValid || 0).toLocaleString()} / <span class="${(item.lotteryWinLoss || 0) < 0 ? 'text-danger' : ((item.lotteryWinLoss || 0) > 0 ? 'text-success' : '')}">${(item.lotteryWinLoss || 0).toLocaleString()}</span></td>
+                            <td class="amount-cell text-end">${(item.thirdpartyBet || 0).toLocaleString()} / <span class="${(item.thirdpartyWinLoss || 0) < 0 ? 'text-danger' : ((item.thirdpartyWinLoss || 0) > 0 ? 'text-success' : '')}">${(item.thirdpartyWinLoss || 0).toLocaleString()}</span></td>
+                            <td>
+                                <a href="#" class="text-decoration-none me-2">彩票详情</a>
+                                <a href="#" class="text-decoration-none">三方详情</a>
+                            </td>
+                        </tr>
+                    `;
+                    $tbody.append(rowHtml);
+                });
+
+                // Render pagination
+                let totalPages = Math.ceil(filteredList.length / pageSize);
+                let $pagination = $('.pagination');
+                $pagination.empty();
+
+                $pagination.closest('div').find('span').text(`共 ${filteredList.length} 条`);
+
+                // Previous button
+                let prevClass = currentPage === 1 ? 'disabled' : '';
+                let $prev = $(`
+                    <li class="page-item me-2 ${prevClass}">
+                        <a class="page-link text-secondary p-0" href="#" aria-label="Previous">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                `);
+                $prev.on('click', function(e) {
+                    e.preventDefault();
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTableAndPagination();
+                    }
+                });
+                $pagination.append($prev);
+
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    let activeClass = i === currentPage ? 'active' : '';
+                    let $page = $(`
+                        <li class="page-item ${activeClass} me-2">
+                            <a class="page-link px-2 py-0 ${i === currentPage ? 'fw-bold' : 'text-secondary'}" href="#">${i}</a>
+                        </li>
+                    `);
+                    $page.on('click', function(e) {
+                        e.preventDefault();
+                        currentPage = i;
+                        renderTableAndPagination();
+                    });
+                    $pagination.append($page);
+                }
+
+                // Next button
+                let nextClass = currentPage === totalPages ? 'disabled' : '';
+                let $next = $(`
+                    <li class="page-item ${nextClass}">
+                        <a class="page-link text-secondary p-0" href="#" aria-label="Next">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                `);
+                $next.on('click', function(e) {
+                    e.preventDefault();
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTableAndPagination();
+                    }
+                });
+                $pagination.append($next);
+            }
+
+            function updateDashboardAndCharts(dateRangeString, onlyTrendChart = false) {
+                // Parse date range
+                let parts = (dateRangeString || '2026-06-25 ~ 2026-07-01').split(' ~ ');
+                let startDateStr = parts[0];
+                let endDateStr = parts[1];
+
+                let startDate = moment(startDateStr, "YYYY-MM-DD");
+                let endDate = moment(endDateStr, "YYYY-MM-DD");
+                let diffDays = endDate.diff(startDate, 'days') + 1;
+
+                // Previous Period dates
+                let prevEndDate = startDate.clone().subtract(1, 'days');
+                let prevStartDate = prevEndDate.clone().subtract(diffDays - 1, 'days');
+
+                let prevStartStr = prevStartDate.format("YYYY-MM-DD");
+                let prevEndStr = prevEndDate.format("YYYY-MM-DD");
+
+                // Filter data for current and previous period
+                let $accountInput = $('input[placeholder="账号"]');
+                let accountSearch = ($accountInput.length && $accountInput.val()) ? $accountInput.val().trim().toLowerCase() : '';
+
+                let currData = dataList.filter(item => {
+                    let matchDate = item.date >= startDateStr && item.date <= endDateStr;
+                    let matchAccount = !accountSearch || item.member.toLowerCase().indexOf(accountSearch) !== -1;
+                    return matchDate && matchAccount;
+                });
+
+                let prevData = dataList.filter(item => {
+                    let matchDate = item.date >= prevStartStr && item.date <= prevEndStr;
+                    let matchAccount = !accountSearch || item.member.toLowerCase().indexOf(accountSearch) !== -1;
+                    return matchDate && matchAccount;
+                });
+
+                // Compute Metrics for current period
+                let currDep = 0, currWith = 0, currNewUsers = 0, currLotteryWin = 0, currThirdWin = 0;
+                currData.forEach(item => {
+                    currDep += ((item.depAmt || 0) + (item.depManualAmt || 0));
+                    currWith += ((item.withAmt || 0) + (item.withManualAmt || 0));
+                    currLotteryWin += (item.lotteryWinLoss || 0);
+                    currThirdWin += (item.thirdpartyWinLoss || 0);
+                    if (item.isNew) currNewUsers++;
+                });
+                let currNet = currDep - currWith;
+                let currLotteryProfit = -currLotteryWin;
+                let currThirdProfit = -currThirdWin;
+
+                // Compute Metrics for previous period
+                let prevDep = 0, prevWith = 0, prevNewUsers = 0, prevLotteryWin = 0, prevThirdWin = 0;
+                prevData.forEach(item => {
+                    prevDep += ((item.depAmt || 0) + (item.depManualAmt || 0));
+                    prevWith += ((item.withAmt || 0) + (item.withManualAmt || 0));
+                    prevLotteryWin += (item.lotteryWinLoss || 0);
+                    prevThirdWin += (item.thirdpartyWinLoss || 0);
+                    if (item.isNew) prevNewUsers++;
+                });
+                let prevNet = prevDep - prevWith;
+                let prevLotteryProfit = -prevLotteryWin;
+                let prevThirdProfit = -prevThirdWin;
+
+                if (!onlyTrendChart) {
+                    // Update Stat Cards Text
+                    $('#card-lottery-val').text((currLotteryProfit >= 0 ? '+' : '') + currLotteryProfit.toLocaleString());
+                    $('#card-third-val').text((currThirdProfit >= 0 ? '+' : '') + currThirdProfit.toLocaleString());
+                    $('#card-users-val').text(currNewUsers.toLocaleString());
+                    $('#card-dep-val').text(currDep.toLocaleString());
+                    $('#card-with-val').text(currWith.toLocaleString());
+
+                    // Update badging logic helper
+                    function updateBadge($badge, current, previous) {
+                        let pct = 0;
+                        current = Number(current) || 0;
+                        previous = Number(previous) || 0;
+                        if (previous !== 0) {
+                            pct = ((current - previous) / Math.abs(previous)) * 100;
+                        } else if (current > 0) {
+                            pct = 100.0;
+                        } else if (current < 0) {
+                            pct = -100.0;
+                        }
+                        if (isNaN(pct)) pct = 0;
+                        
+                        $badge.removeClass('bg-success-light text-success bg-danger-light text-danger');
+                        if (pct >= 0) {
+                            $badge.addClass('bg-success-light text-success').text(`▲ ${pct.toFixed(1)}%`);
+                        } else {
+                            $badge.addClass('bg-danger-light text-danger').text(`▼ ${Math.abs(pct).toFixed(1)}%`);
+                        }
+                    }
+
+                    updateBadge($('#card-lottery-badge'), currLotteryProfit, prevLotteryProfit);
+                    updateBadge($('#card-third-badge'), currThirdProfit, prevThirdProfit);
+                    updateBadge($('#card-users-badge'), currNewUsers, prevNewUsers);
+                    updateBadge($('#card-dep-badge'), currDep, prevDep);
+                    updateBadge($('#card-with-badge'), currWith, prevWith);
+                }
+
+                // Prepare chronological arrays for charts
+                let dateLabels = [];
+                let currDate = startDate.clone();
+                while (currDate.isSameOrBefore(endDate)) {
+                    dateLabels.push(currDate.format("YYYY-MM-DD"));
+                    currDate.add(1, 'days');
+                }
+
+                let dailyNet = new Array(dateLabels.length).fill(0);
+                let dailyLottery = new Array(dateLabels.length).fill(0);
+                let dailyThird = new Array(dateLabels.length).fill(0);
+                let dailyLotteryBet = new Array(dateLabels.length).fill(0);
+                let dailyThirdBet = new Array(dateLabels.length).fill(0);
+                let dailyNewUsers = new Array(dateLabels.length).fill(0);
+                let dailyDepAmt = new Array(dateLabels.length).fill(0);
+                let dailyWithAmt = new Array(dateLabels.length).fill(0);
+                let dailyDepCount = new Array(dateLabels.length).fill(0);
+                let dailyWithCount = new Array(dateLabels.length).fill(0);
+
+                dateLabels.forEach((dStr, idx) => {
+                    let dayRows = currData.filter(r => r.date === dStr);
+                    dayRows.forEach(r => {
+                        dailyNet[idx] += (((r.depAmt || 0) + (r.depManualAmt || 0)) - ((r.withAmt || 0) + (r.withManualAmt || 0)));
+                        dailyLottery[idx] += -(r.lotteryWinLoss || 0);
+                        dailyThird[idx] += -(r.thirdpartyWinLoss || 0);
+                        dailyLotteryBet[idx] += (r.lotteryBet || 0);
+                        dailyThirdBet[idx] += (r.thirdpartyBet || 0);
+                        if (r.isNew) dailyNewUsers[idx]++;
+                        dailyDepAmt[idx] += ((r.depAmt || 0) + (r.depManualAmt || 0));
+                        dailyWithAmt[idx] += ((r.withAmt || 0) + (r.withManualAmt || 0));
+                        dailyDepCount[idx] += ((r.depTimes || 0) + (r.depManualTimes || 0));
+                        dailyWithCount[idx] += ((r.withTimes || 0) + (r.withManualTimes || 0));
+                    });
+                });
+
+                if (!onlyTrendChart) {
+                    // Render Sparklines
+                    function drawSpark(canvasId, data, color) {
+                        let canvas = document.getElementById(canvasId);
+                        if (!canvas) return;
+                        let ctx = canvas.getContext('2d');
+                        if (sparkChartInstances[canvasId]) {
+                            sparkChartInstances[canvasId].data.datasets[0].data = data;
+                            sparkChartInstances[canvasId].update();
+                            return;
+                        }
+                        sparkChartInstances[canvasId] = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: data.map((_, i) => i),
+                                datasets: [{
+                                    data: data,
+                                    borderColor: color,
+                                    borderWidth: 2,
+                                    fill: false,
+                                    pointRadius: 0,
+                                    pointHoverRadius: 0,
+                                    tension: 0.4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                                scales: { x: { display: false }, y: { display: false } }
+                            }
+                        });
+                    }
+
+                    drawSpark('spark-lottery', dailyLottery, '#10b981');
+                    drawSpark('spark-third', dailyThird, '#10b981');
+                    drawSpark('spark-users', dailyNewUsers, '#8b5cf6');
+                    drawSpark('spark-dep', dailyDepAmt, '#3b82f6');
+                    drawSpark('spark-with', dailyWithAmt, '#4b5563');
+                }
+
+                // Render Subtitle Texts
+                $('#trend-time-subtitle').text(`按日展示 · 共${dateLabels.length}天`);
+                if (!onlyTrendChart) {
+                    $('#compare-time-subtitle').text(`按日展示，共 ${dateLabels.length} 天`);
+                    $('#new-users-subtitle').text(`累計 ${currNewUsers} 位新用戶`);
+                }
+
+                // Render main "大盤趨勢總覽" Chart (Using separate Y-axes to support extreme changes)
+                let trendCanvas = document.getElementById('market-trend-chart');
+                if (trendCanvas) {
+                    let trendDataLottery = activeTrendMetric === 'winloss' ? dailyLottery : dailyLotteryBet;
+                    let trendDataThird = activeTrendMetric === 'winloss' ? dailyThird : dailyThirdBet;
+
+                    // Update legend text
+                    if (activeTrendMetric === 'winloss') {
+                        $('#legend-lottery .legend-text').text('彩票輸贏');
+                        $('#legend-third .legend-text').text('三方輸贏');
+                    } else {
+                        $('#legend-lottery .legend-text').text('彩票投注');
+                        $('#legend-third .legend-text').text('三方投注');
+                    }
+
+                    if (marketTrendChart) {
+                        // Update in-place
+                        marketTrendChart.data.labels = dateLabels.map(d => d.substring(5));
+                        marketTrendChart.data.datasets[0].data = dailyNet;
+                        marketTrendChart.data.datasets[1].data = trendDataLottery;
+                        marketTrendChart.data.datasets[1].label = activeTrendMetric === 'winloss' ? '彩票輸贏' : '彩票投注';
+                        marketTrendChart.data.datasets[2].data = trendDataThird;
+                        marketTrendChart.data.datasets[2].label = activeTrendMetric === 'winloss' ? '三方輸贏' : '三方投注';
+
+                        // Dynamic scale bounds update
+                        marketTrendChart.options.scales.yNet.min = dateLabels.length === 7 ? -15000 : undefined;
+                        marketTrendChart.options.scales.yNet.max = dateLabels.length === 7 ? 9000 : undefined;
+                        marketTrendChart.options.scales.yNet.ticks.stepSize = dateLabels.length === 7 ? 7566 : undefined;
+                        marketTrendChart.options.scales.x.ticks.maxTicksLimit = dateLabels.length > 7 ? 8 : undefined;
+
+                        marketTrendChart.update();
+                    } else {
+                        let trendCtx = trendCanvas.getContext('2d');
+                        let lotGradient = trendCtx.createLinearGradient(0, 0, 0, 280);
+                        lotGradient.addColorStop(0, 'rgba(16, 185, 129, 0.2)');
+                        lotGradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
+
+                        // Max points label plugin inside configuration
+                        const maxPointsLabelPlugin = {
+                            id: 'maxPointsLabel',
+                            afterDatasetsDraw(chart) {
+                                const { ctx, data } = chart;
+                                ctx.save();
+                                ctx.font = 'bold 11px sans-serif';
+                                ctx.textAlign = 'center';
+                                
+                                const june30Idx = data.labels.indexOf("06-30");
+                                if (june30Idx !== -1) {
+                                    const metaLottery = chart.getDatasetMeta(1);
+                                    const metaThird = chart.getDatasetMeta(2);
+                                    
+                                    if (metaLottery && metaLottery.data[june30Idx] && chart.isDatasetVisible(1)) {
+                                        const pt = metaLottery.data[june30Idx];
+                                        const val = data.datasets[1].data[june30Idx];
+                                        let text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
+                                        ctx.fillStyle = '#10b981';
+                                        ctx.fillText(text, pt.x, pt.y - 12);
+                                    }
+                                    
+                                    if (metaThird && metaThird.data[june30Idx] && chart.isDatasetVisible(2)) {
+                                        const pt = metaThird.data[june30Idx];
+                                        const val = data.datasets[2].data[june30Idx];
+                                        let text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
+                                        ctx.fillStyle = '#fb8c00';
+                                        ctx.fillText(text, pt.x, pt.y - 25);
+                                    }
+                                }
+                                ctx.restore();
+                            }
+                        };
+
+                        marketTrendChart = new Chart(trendCtx, {
+                            type: 'line',
+                            plugins: [maxPointsLabelPlugin],
+                            data: {
+                                labels: dateLabels.map(d => d.substring(5)),
+                                datasets: [
+                                    {
+                                        label: '淨入款',
+                                        data: dailyNet,
+                                        borderColor: 'transparent',
+                                        backgroundColor: 'transparent',
+                                        fill: false,
+                                        yAxisID: 'yNet',
+                                        pointRadius: 0,
+                                        pointHoverRadius: 0,
+                                        showLine: false
+                                    },
+                                    {
+                                        label: activeTrendMetric === 'winloss' ? '彩票輸贏' : '彩票投注',
+                                        data: trendDataLottery,
+                                        borderColor: '#10b981',
+                                        backgroundColor: lotGradient,
+                                        fill: true,
+                                        yAxisID: 'yLottery',
+                                        tension: 0.4,
+                                        borderWidth: 3,
+                                        pointRadius: 3,
+                                        pointHoverRadius: 6
+                                    },
+                                    {
+                                        label: activeTrendMetric === 'winloss' ? '三方輸贏' : '三方投注',
+                                        data: trendDataThird,
+                                        borderColor: '#fb8c00',
+                                        fill: false,
+                                        yAxisID: 'yThird',
+                                        tension: 0.4,
+                                        borderWidth: 3,
+                                        pointRadius: 3,
+                                        pointHoverRadius: 6
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                interaction: {
+                                    mode: 'index',
+                                    intersect: false
+                                },
+                                plugins: {
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                if (context.datasetIndex === 0) return null;
+                                                let label = context.dataset.label || '';
+                                                if (label) label += ': ';
+                                                if (context.parsed.y !== null) {
+                                                    label += (context.parsed.y >= 0 ? '+' : '') + context.parsed.y.toLocaleString();
+                                                }
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    yNet: {
+                                        display: true,
+                                        position: 'left',
+                                        grid: { drawOnChartArea: true, color: 'rgba(255, 255, 255, 0.05)' },
+                                        min: dateLabels.length === 7 ? -15000 : undefined,
+                                        max: dateLabels.length === 7 ? 9000 : undefined,
+                                        ticks: {
+                                            color: '#94a3b8',
+                                            font: { size: 10 },
+                                            callback: function(value) {
+                                                if (dateLabels.length === 7) {
+                                                    if (value === -14388) return '-1.4萬';
+                                                    if (value === -6822) return '-6,822';
+                                                    if (value === 744) return '744';
+                                                    if (value === 8311) return '8,311';
+                                                    return null;
+                                                }
+                                                // Dynamic ticks: format nicely
+                                                if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
+                                                if (value >= 10000) return (value / 10000).toFixed(1) + '萬';
+                                                if (value <= -1000000) return (value / 1000000).toFixed(1) + 'M';
+                                                if (value <= -10000) return (value / 10000).toFixed(1) + '萬';
+                                                return value.toLocaleString();
+                                            },
+                                            stepSize: dateLabels.length === 7 ? 7566 : undefined
+                                        },
+                                        afterBuildTicks: function(axis) {
+                                            if (axis.chart.data.labels.length === 7) {
+                                                axis.ticks = [
+                                                    { value: -14388 },
+                                                    { value: -6822 },
+                                                    { value: 744 },
+                                                    { value: 8311 }
+                                                ];
+                                            }
+                                        }
+                                    },
+                                    yLottery: {
+                                        display: false,
+                                        grid: { drawOnChartArea: false }
+                                    },
+                                    yThird: {
+                                        display: false,
+                                        grid: { drawOnChartArea: false }
+                                    },
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { 
+                                            color: '#94a3b8', 
+                                            font: { size: 11 },
+                                            autoSkip: true,
+                                            maxTicksLimit: dateLabels.length > 7 ? 8 : undefined
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        // Legend toggle bindings (1 for Lottery, 2 for Third)
+                        $('#legend-lottery').off('click').on('click', function() {
+                            let visible = marketTrendChart.isDatasetVisible(1);
+                            marketTrendChart.setDatasetVisibility(1, !visible);
+                            marketTrendChart.update();
+                            $(this).css('opacity', visible ? '0.4' : '1.0');
+                        }).css('opacity', '1.0');
+
+                        $('#legend-third').off('click').on('click', function() {
+                            let visible = marketTrendChart.isDatasetVisible(2);
+                            marketTrendChart.setDatasetVisibility(2, !visible);
+                            marketTrendChart.update();
+                            $(this).css('opacity', visible ? '0.4' : '1.0');
+                        }).css('opacity', '1.0');
+                    }
+                }
+
+                if (onlyTrendChart) {
+                    return;
+                }
+
+                // Render Sub Chart 1: 充值 / 提現對比
+                function drawCompareChart() {
+                    let compareCanvas = document.getElementById('dep-with-compare-chart');
+                    if (!compareCanvas) return;
+                    let depData = activeCompareType === 'amount' ? dailyDepAmt : dailyDepCount;
+                    let withData = activeCompareType === 'amount' ? dailyWithAmt : dailyWithCount;
+
+                    if (depWithCompareChart) {
+                        depWithCompareChart.data.labels = dateLabels.map(d => d.substring(5));
+                        depWithCompareChart.data.datasets[0].data = depData;
+                        depWithCompareChart.data.datasets[1].data = withData;
+                        depWithCompareChart.update();
+                    } else {
+                        let compareCtx = compareCanvas.getContext('2d');
+                        depWithCompareChart = new Chart(compareCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: dateLabels.map(d => d.substring(5)),
+                                datasets: [
+                                    {
+                                        label: '充值/加錢',
+                                        data: depData,
+                                        backgroundColor: '#3b82f6',
+                                        borderRadius: 4
+                                    },
+                                    {
+                                        label: '提現/扣錢',
+                                        data: withData,
+                                        backgroundColor: '#475569',
+                                        borderRadius: 4
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom',
+                                        labels: { color: '#94a3b8', font: { size: 11 } }
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                let label = context.dataset.label || '';
+                                                if (label) label += ': ';
+                                                if (context.parsed.y !== null) {
+                                                    label += activeCompareType === 'amount' ? '$' + context.parsed.y.toLocaleString() : context.parsed.y.toLocaleString() + ' 次';
+                                                }
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                        ticks: {
+                                            color: '#94a3b8',
+                                            font: { size: 10 },
+                                            callback: function(value) {
+                                                if (activeCompareType === 'amount') {
+                                                    if (value >= 1000000) return (value / 1000000).toFixed(0) + 'M';
+                                                    if (value >= 1000) return (value / 1000).toFixed(0) + 'K';
+                                                    return '$' + value;
+                                                }
+                                                return value;
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: '#94a3b8', font: { size: 11 } }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+
+                drawCompareChart();
+
+                // Button toggles for compare chart
+                $('#toggle-compare-amt').off('click').on('click', function() {
+                    activeCompareType = 'amount';
+                    $(this).addClass('active');
+                    $('#toggle-compare-count').removeClass('active');
+                    drawCompareChart();
+                });
+
+                // Button toggles for compare chart
+                $('#toggle-compare-count').off('click').on('click', function() {
+                    activeCompareType = 'count';
+                    $(this).addClass('active');
+                    $('#toggle-compare-amt').removeClass('active');
+                    drawCompareChart();
+                });
+
+                // Render Sub Chart 2: 新增用戶趨勢
+                let usersCanvas = document.getElementById('new-users-trend-chart');
+                if (usersCanvas) {
+                    if (newUsersTrendChart) {
+                        newUsersTrendChart.data.labels = dateLabels.map(d => d.substring(5));
+                        newUsersTrendChart.data.datasets[0].data = dailyNewUsers;
+                        newUsersTrendChart.update();
+                    } else {
+                        let usersCtx = usersCanvas.getContext('2d');
+                        newUsersTrendChart = new Chart(usersCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: dateLabels.map(d => d.substring(5)),
+                                datasets: [{
+                                    label: '新增用戶',
+                                    data: dailyNewUsers,
+                                    backgroundColor: '#8b5cf6',
+                                    borderRadius: 4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return `新增用戶: ${context.parsed.y} 人`;
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                        ticks: {
+                                            color: '#94a3b8',
+                                            font: { size: 10 },
+                                            stepSize: 1,
+                                            precision: 0
+                                        }
+                                    },
+                                    x: {
+                                        grid: { display: false },
+                                        ticks: { color: '#94a3b8', font: { size: 11 } }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            // 4. Trigger queries and updates and loading overlay helper
+            function showDashboardLoading(callback) {
+                let $loader = $('#dashboard-loading');
+                if ($loader.length) {
+                    $loader.css({ 'opacity': '1', 'pointer-events': 'auto' });
+                    setTimeout(function() {
+                        if (typeof callback === 'function') callback();
+                        $loader.css({ 'opacity': '0', 'pointer-events': 'none' });
+                    }, 500); // 500ms delay for premium feel
+                } else {
+                    if (typeof callback === 'function') callback();
+                }
+            }
+
+            function doQuery() {
+                showDashboardLoading(function() {
+                    let dateRangeStr = $('#daily-date-range').val();
+                    if (!dateRangeStr || dateRangeStr.indexOf(' ~ ') === -1) {
+                        dateRangeStr = '2026-06-25 ~ 2026-07-01';
+                    }
+                    
+                    // Sync the dashboard selector active button state
+                    $('#dashboard-range-selector button').removeClass('active text-white').addClass('text-secondary');
+                    if (dateRangeStr === '2026-06-02 ~ 2026-07-01') {
+                        $('#dashboard-range-selector button[data-range="30days"]').addClass('active text-white').removeClass('text-secondary');
+                    } else if (dateRangeStr === '2026-06-25 ~ 2026-07-01') {
+                        $('#dashboard-range-selector button[data-range="7days"]').addClass('active text-white').removeClass('text-secondary');
+                    }
+
+                    let $accountInput = $('input[placeholder="账号"]');
+                    let accountSearch = ($accountInput.length && $accountInput.val()) ? $accountInput.val().trim().toLowerCase() : '';
+
+                    let parts = dateRangeStr.split(' ~ ');
+                    let startDateStr = parts[0];
+                    let endDateStr = parts[1];
+
+                    // Filter master data for table list
+                    filteredList = dataList.filter(item => {
+                        let matchDate = item.date >= startDateStr && item.date <= endDateStr;
+                        let matchAccount = !accountSearch || item.member.toLowerCase().indexOf(accountSearch) !== -1;
+                        return matchDate && matchAccount;
+                    });
+
+                    currentPage = 1;
+                    renderTableAndPagination();
+                    updateDashboardAndCharts(dateRangeStr);
+                });
+            }
+
+            // Bind dashboard range selectors (7days, 30days)
+            $('#dashboard-range-selector button').on('click', function() {
+                let range = $(this).attr('data-range');
+                let end = moment("2026-07-01", "YYYY-MM-DD");
+                let start = end.clone();
+
+                if (range === '7days') {
+                    start.subtract(6, 'days'); // 7 days inclusive: June 25 to July 1
+                } else if (range === '30days') {
+                    start.subtract(29, 'days'); // 30 days inclusive: June 2 to July 1
+                }
+
+                let rangeStr = `${start.format("YYYY-MM-DD")} ~ ${end.format("YYYY-MM-DD")}`;
+                
+                // Update input text value
+                $('#daily-date-range').val(rangeStr);
+
+                // Update daterangepicker instance state if initialized
+                let picker = $('#daily-date-range').data('daterangepicker');
+                if (picker) {
+                    picker.setStartDate(start.toDate());
+                    picker.setEndDate(end.toDate());
+                }
+
+                // Update active button state
+                $('#dashboard-range-selector button').removeClass('active text-white').addClass('text-secondary');
+                $(this).addClass('active text-white').removeClass('text-secondary');
+
+                // Trigger query
+                doQuery();
+            });
+
+            // Bind query button click
+            $('.btn-primary:contains("查询")').off('click').on('click', function(e) {
+                e.preventDefault();
+                doQuery();
+            });
+
+            // Bind daterangepicker apply event
+            $('#daily-date-range').on('apply.daterangepicker change', function() {
+                doQuery();
+            });
+
+            // Run initial query on page load
+            doQuery();
+        });
+    </script>
 </body>
+
 </html>
