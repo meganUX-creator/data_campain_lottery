@@ -40,6 +40,33 @@
             color: #94a3b8 !important;
             border: none !important;
         }
+        /* Trend selector tabs custom styles */
+        .trend-tabs {
+            display: inline-flex;
+            background-color: #0c101b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .trend-tab-btn {
+            background-color: transparent;
+            color: #94a3b8;
+            border: none;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .trend-tab-btn:hover {
+            color: #f8fafc;
+        }
+        .trend-tab-btn.active {
+            background-color: #5c60f5;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -246,23 +273,23 @@
 
                                 <!-- Row 2: 大盤趨勢總覽 -->
                                 <div class="card p-4 border-0 mb-4" style="background-color: #111625; border-radius: 12px;">
-                                    <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
-                                        <div>
-                                            <h6 class="fw-bold mb-1 text-white">大盤趨勢總覽</h6>
-                                            <div id="trend-time-subtitle" style="font-size: 0.75rem; color: #94a3b8;">按日展示 · 共7天</div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                        <!-- Tab 切換按鈕 -->
+                                        <div class="trend-tabs" id="trend-metric-selector">
+                                            <button type="button" class="trend-tab-btn active" data-metric="bet-amount">投注金額趨勢</button>
+                                            <button type="button" class="trend-tab-btn" data-metric="bet-count">投注次數趨勢</button>
+                                            <button type="button" class="trend-tab-btn" data-metric="win-loss">输赢金额</button>
                                         </div>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <!-- Custom Legends -->
-                                            <div class="d-flex gap-2" id="trend-legend-container">
-                                                <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-lottery" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #10b981;">
-                                                    <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span>
-                                                    <span class="legend-text">彩票投注</span>
-                                                </button>
-                                                <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-third" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #fb8c00;">
-                                                    <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #fb8c00; display: inline-block;"></span>
-                                                    <span class="legend-text">三方投注</span>
-                                                </button>
-                                            </div>
+                                        <!-- Custom Legends -->
+                                        <div class="d-flex gap-2" id="trend-legend-container">
+                                            <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-lottery" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #10b981;">
+                                                <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10b981; display: inline-block;"></span>
+                                                <span class="legend-text">彩票投注</span>
+                                            </button>
+                                            <button class="btn btn-sm d-flex align-items-center gap-2 px-3 py-1 text-white" id="legend-third" style="background-color: #1e293b; border-radius: 20px; font-size: 0.8rem; border: 1px solid #fb8c00;">
+                                                <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #fb8c00; display: inline-block;"></span>
+                                                <span class="legend-text">三方投注</span>
+                                            </button>
                                         </div>
                                     </div>
                                     <div style="height: 280px; width: 100%;">
@@ -614,10 +641,10 @@
                 
                 // 2026-06-29
                 { date: '2026-06-29', member: 'raa002', isNew: false, depTimes: 0, depManualTimes: 1, depAmt: 0, depManualAmt: 2500000, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 100000, lotteryValid: 100000, lotteryWinLoss: 14388, thirdpartyBet: 200000, thirdpartyWinLoss: -150000 },
-                { date: '2026-06-29', member: 'yuri01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 1, withManualTimes: 0, withAmt: 1200000, withManualAmt: 0, lotteryBet: 80000, lotteryValid: 80000, lotteryWinLoss: -8000, thirdpartyBet: 120000, thirdpartyWinLoss: -10000 },
+                { date: '2026-06-29', member: 'yuri01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 1, withManualTimes: 0, withAmt: 1200000, withManualAmt: 0, lotteryBet: 80000, lotteryValid: 80000, lotteryWinLoss: -8000, thirdpartyBet: 120000, thirdpartyWinLoss: 500000 },
                 
                 // 2026-06-28
-                { date: '2026-06-28', member: 'newbie01', isNew: true, depTimes: 1, depManualTimes: 0, depAmt: 1800000, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: -4000, thirdpartyBet: 100000, thirdpartyWinLoss: -8000 },
+                { date: '2026-06-28', member: 'newbie01', isNew: true, depTimes: 1, depManualTimes: 0, depAmt: 1800000, depManualAmt: 0, withTimes: 0, withManualTimes: 0, withAmt: 0, withManualAmt: 0, lotteryBet: 50000, lotteryValid: 50000, lotteryWinLoss: 250000, thirdpartyBet: 100000, thirdpartyWinLoss: 400000 },
                 { date: '2026-06-28', member: 'albertvn01', isNew: false, depTimes: 0, depManualTimes: 0, depAmt: 0, depManualAmt: 0, withTimes: 0, withManualTimes: 1, withAmt: 950000, withManualAmt: 950000, lotteryBet: 90000, lotteryValid: 90000, lotteryWinLoss: -9000, thirdpartyBet: 180000, thirdpartyWinLoss: -18000 },
                 
                 // 2026-06-27
@@ -723,7 +750,7 @@
             let currentPage = 1;
             const pageSize = 10;
             let activeCompareType = 'amount'; // 'amount' or 'count'
-            let activeTrendMetric = 'bet'; // 'bet' or 'winloss'
+            let activeTrendMetric = 'bet-amount'; // 'bet-amount', 'bet-count', 'win-loss'
             let filteredList = [];
 
             // Global Chart instances
@@ -939,6 +966,8 @@
                 let dailyThird = new Array(dateLabels.length).fill(0);
                 let dailyLotteryBet = new Array(dateLabels.length).fill(0);
                 let dailyThirdBet = new Array(dateLabels.length).fill(0);
+                let dailyLotteryBetCount = new Array(dateLabels.length).fill(0);
+                let dailyThirdBetCount = new Array(dateLabels.length).fill(0);
                 let dailyNewUsers = new Array(dateLabels.length).fill(0);
                 let dailyDepAmt = new Array(dateLabels.length).fill(0);
                 let dailyWithAmt = new Array(dateLabels.length).fill(0);
@@ -953,6 +982,13 @@
                         dailyThird[idx] += -(r.thirdpartyWinLoss || 0);
                         dailyLotteryBet[idx] += (r.lotteryBet || 0);
                         dailyThirdBet[idx] += (r.thirdpartyBet || 0);
+                        
+                        // Calculate simulated counts
+                        let lotCount = r.lotteryBetCount || (r.lotteryBet > 0 ? Math.ceil(r.lotteryBet / (1000 + (r.member.charCodeAt(0) % 5) * 200)) : 0);
+                        let thirdCount = r.thirdpartyBetCount || (r.thirdpartyBet > 0 ? Math.ceil(r.thirdpartyBet / (2000 + (r.member.charCodeAt(0) % 5) * 300)) : 0);
+                        dailyLotteryBetCount[idx] += lotCount;
+                        dailyThirdBetCount[idx] += thirdCount;
+
                         if (r.isNew) dailyNewUsers[idx]++;
                         dailyDepAmt[idx] += ((r.depAmt || 0) + (r.depManualAmt || 0));
                         dailyWithAmt[idx] += ((r.withAmt || 0) + (r.withManualAmt || 0));
@@ -1003,7 +1039,6 @@
                 }
 
                 // Render Subtitle Texts
-                $('#trend-time-subtitle').text(`按日展示 · 共${dateLabels.length}天`);
                 if (!onlyTrendChart) {
                     $('#compare-time-subtitle').text(`按日展示，共 ${dateLabels.length} 天`);
                     $('#new-users-subtitle').text(`累計 ${currNewUsers} 位新用戶`);
@@ -1012,31 +1047,105 @@
                 // Render main "大盤趨勢總覽" Chart (Using separate Y-axes to support extreme changes)
                 let trendCanvas = document.getElementById('market-trend-chart');
                 if (trendCanvas) {
-                    let trendDataLottery = activeTrendMetric === 'winloss' ? dailyLottery : dailyLotteryBet;
-                    let trendDataThird = activeTrendMetric === 'winloss' ? dailyThird : dailyThirdBet;
+                    let trendDataLottery;
+                    let trendDataThird;
+                    if (activeTrendMetric === 'win-loss') {
+                        trendDataLottery = dailyLottery;
+                        trendDataThird = dailyThird;
+                    } else if (activeTrendMetric === 'bet-count') {
+                        trendDataLottery = dailyLotteryBetCount;
+                        trendDataThird = dailyThirdBetCount;
+                    } else {
+                        trendDataLottery = dailyLotteryBet;
+                        trendDataThird = dailyThirdBet;
+                    }
 
                     // Update legend text
-                    if (activeTrendMetric === 'winloss') {
+                    if (activeTrendMetric === 'win-loss') {
                         $('#legend-lottery .legend-text').text('彩票輸贏');
                         $('#legend-third .legend-text').text('三方輸贏');
+                    } else if (activeTrendMetric === 'bet-count') {
+                        $('#legend-lottery .legend-text').text('彩票投注次數');
+                        $('#legend-third .legend-text').text('三方投注次數');
                     } else {
                         $('#legend-lottery .legend-text').text('彩票投注');
                         $('#legend-third .legend-text').text('三方投注');
+                    }
+
+                    // Dynamic colors and chart type based on metric
+                    let isBar = activeTrendMetric === 'win-loss';
+                    let lotType = isBar ? 'bar' : 'line';
+                    let thirdType = isBar ? 'bar' : 'line';
+                    let lotYAxis = isBar ? 'yNet' : 'yLottery';
+                    let thirdYAxis = isBar ? 'yNet' : 'yThird';
+                    let lotColor = isBar ? '#5c60f5' : '#10b981';
+                    let thirdColor = isBar ? '#ffb020' : '#fb8c00';
+
+                    // Update Legend styles
+                    if (isBar) {
+                        $('#legend-lottery').css('border-color', lotColor);
+                        $('#legend-lottery span:first-child').css('background-color', lotColor);
+                        $('#legend-third').css('border-color', thirdColor);
+                        $('#legend-third span:first-child').css('background-color', thirdColor);
+                    } else {
+                        $('#legend-lottery').css('border-color', '#10b981');
+                        $('#legend-lottery span:first-child').css('background-color', '#10b981');
+                        $('#legend-third').css('border-color', '#fb8c00');
+                        $('#legend-third span:first-child').css('background-color', '#fb8c00');
                     }
 
                     if (marketTrendChart) {
                         // Update in-place
                         marketTrendChart.data.labels = dateLabels.map(d => d.substring(5));
                         marketTrendChart.data.datasets[0].data = dailyNet;
+                        // Avoid dailyNet large values stretching yNet scale in win-loss metric
+                        marketTrendChart.data.datasets[0].yAxisID = isBar ? 'yLottery' : 'yNet';
+
+                        // Update dataset 1 (Lottery)
                         marketTrendChart.data.datasets[1].data = trendDataLottery;
-                        marketTrendChart.data.datasets[1].label = activeTrendMetric === 'winloss' ? '彩票輸贏' : '彩票投注';
+                        marketTrendChart.data.datasets[1].label = activeTrendMetric === 'win-loss' ? '彩票輸贏' : (activeTrendMetric === 'bet-count' ? '彩票投注次數' : '彩票投注金額');
+                        marketTrendChart.data.datasets[1].type = lotType;
+                        marketTrendChart.data.datasets[1].yAxisID = lotYAxis;
+                        marketTrendChart.data.datasets[1].borderColor = lotColor;
+                        marketTrendChart.data.datasets[1].backgroundColor = isBar ? lotColor : 'rgba(16, 185, 129, 0.2)';
+                        marketTrendChart.data.datasets[1].borderWidth = isBar ? 0 : 3;
+                        marketTrendChart.data.datasets[1].pointRadius = isBar ? 0 : 3;
+                        marketTrendChart.data.datasets[1].pointHoverRadius = isBar ? 0 : 6;
+                        marketTrendChart.data.datasets[1].borderRadius = isBar ? 4 : 0;
+
+                        // Update dataset 2 (Thirdparty)
                         marketTrendChart.data.datasets[2].data = trendDataThird;
-                        marketTrendChart.data.datasets[2].label = activeTrendMetric === 'winloss' ? '三方輸贏' : '三方投注';
+                        marketTrendChart.data.datasets[2].label = activeTrendMetric === 'win-loss' ? '三方輸贏' : (activeTrendMetric === 'bet-count' ? '三方投注次數' : '三方投注金額');
+                        marketTrendChart.data.datasets[2].type = thirdType;
+                        marketTrendChart.data.datasets[2].yAxisID = thirdYAxis;
+                        marketTrendChart.data.datasets[2].borderColor = thirdColor;
+                        marketTrendChart.data.datasets[2].backgroundColor = thirdColor;
+                        marketTrendChart.data.datasets[2].borderWidth = isBar ? 0 : 3;
+                        marketTrendChart.data.datasets[2].pointRadius = isBar ? 0 : 3;
+                        marketTrendChart.data.datasets[2].pointHoverRadius = isBar ? 0 : 6;
+                        marketTrendChart.data.datasets[2].borderRadius = isBar ? 4 : 0;
 
                         // Dynamic scale bounds update
-                        marketTrendChart.options.scales.yNet.min = dateLabels.length === 7 ? -15000 : undefined;
-                        marketTrendChart.options.scales.yNet.max = dateLabels.length === 7 ? 9000 : undefined;
-                        marketTrendChart.options.scales.yNet.ticks.stepSize = dateLabels.length === 7 ? 7566 : undefined;
+                        if (isBar) {
+                            marketTrendChart.options.scales.yNet.min = undefined;
+                            marketTrendChart.options.scales.yNet.max = undefined;
+                            marketTrendChart.options.scales.yNet.ticks.stepSize = undefined;
+                            marketTrendChart.options.scales.yNet.afterBuildTicks = undefined;
+                        } else {
+                            marketTrendChart.options.scales.yNet.min = dateLabels.length === 7 ? -15000 : undefined;
+                            marketTrendChart.options.scales.yNet.max = dateLabels.length === 7 ? 9000 : undefined;
+                            marketTrendChart.options.scales.yNet.ticks.stepSize = dateLabels.length === 7 ? 7566 : undefined;
+                            marketTrendChart.options.scales.yNet.afterBuildTicks = function(axis) {
+                                if (axis.chart.data.labels.length === 7 && activeTrendMetric !== 'win-loss') {
+                                    axis.ticks = [
+                                        { value: -14388 },
+                                        { value: -6822 },
+                                        { value: 744 },
+                                        { value: 8311 }
+                                    ];
+                                }
+                            };
+                        }
                         marketTrendChart.options.scales.x.ticks.maxTicksLimit = dateLabels.length > 7 ? 8 : undefined;
 
                         marketTrendChart.update();
@@ -1062,18 +1171,32 @@
                                     
                                     if (metaLottery && metaLottery.data[june30Idx] && chart.isDatasetVisible(1)) {
                                         const pt = metaLottery.data[june30Idx];
-                                        const val = data.datasets[1].data[june30Idx];
-                                        let text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
-                                        ctx.fillStyle = '#10b981';
-                                        ctx.fillText(text, pt.x, pt.y - 12);
+                                        if (pt && typeof pt.x !== 'undefined' && typeof pt.y !== 'undefined') {
+                                            const val = data.datasets[1].data[june30Idx];
+                                            let text;
+                                            if (activeTrendMetric === 'bet-count') {
+                                                text = val.toLocaleString() + '次';
+                                            } else {
+                                                text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
+                                            }
+                                            ctx.fillStyle = activeTrendMetric === 'win-loss' ? '#5c60f5' : '#10b981';
+                                            ctx.fillText(text, pt.x, pt.y - 10);
+                                        }
                                     }
                                     
                                     if (metaThird && metaThird.data[june30Idx] && chart.isDatasetVisible(2)) {
                                         const pt = metaThird.data[june30Idx];
-                                        const val = data.datasets[2].data[june30Idx];
-                                        let text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
-                                        ctx.fillStyle = '#fb8c00';
-                                        ctx.fillText(text, pt.x, pt.y - 25);
+                                        if (pt && typeof pt.x !== 'undefined' && typeof pt.y !== 'undefined') {
+                                            const val = data.datasets[2].data[june30Idx];
+                                            let text;
+                                            if (activeTrendMetric === 'bet-count') {
+                                                text = val.toLocaleString() + '次';
+                                            } else {
+                                                text = (val >= 0 ? '+' : '') + (val / 10000).toFixed(1) + '萬';
+                                            }
+                                            ctx.fillStyle = activeTrendMetric === 'win-loss' ? '#ffb020' : '#fb8c00';
+                                            ctx.fillText(text, pt.x, pt.y - 10);
+                                        }
                                     }
                                 }
                                 ctx.restore();
@@ -1092,33 +1215,38 @@
                                         borderColor: 'transparent',
                                         backgroundColor: 'transparent',
                                         fill: false,
-                                        yAxisID: 'yNet',
+                                        yAxisID: activeTrendMetric === 'win-loss' ? 'yLottery' : 'yNet',
                                         pointRadius: 0,
                                         pointHoverRadius: 0,
                                         showLine: false
                                     },
                                     {
-                                        label: activeTrendMetric === 'winloss' ? '彩票輸贏' : '彩票投注',
+                                        label: activeTrendMetric === 'win-loss' ? '彩票輸贏' : (activeTrendMetric === 'bet-count' ? '彩票投注次數' : '彩票投注金額'),
                                         data: trendDataLottery,
-                                        borderColor: '#10b981',
-                                        backgroundColor: lotGradient,
-                                        fill: true,
-                                        yAxisID: 'yLottery',
+                                        type: lotType,
+                                        borderColor: lotColor,
+                                        backgroundColor: isBar ? lotColor : lotGradient,
+                                        fill: isBar ? false : true,
+                                        yAxisID: lotYAxis,
                                         tension: 0.4,
-                                        borderWidth: 3,
-                                        pointRadius: 3,
-                                        pointHoverRadius: 6
+                                        borderWidth: isBar ? 0 : 3,
+                                        pointRadius: isBar ? 0 : 3,
+                                        pointHoverRadius: isBar ? 0 : 6,
+                                        borderRadius: isBar ? 4 : 0
                                     },
                                     {
-                                        label: activeTrendMetric === 'winloss' ? '三方輸贏' : '三方投注',
+                                        label: activeTrendMetric === 'win-loss' ? '三方輸贏' : (activeTrendMetric === 'bet-count' ? '三方投注次數' : '三方投注金額'),
                                         data: trendDataThird,
-                                        borderColor: '#fb8c00',
+                                        type: thirdType,
+                                        borderColor: thirdColor,
+                                        backgroundColor: thirdColor,
                                         fill: false,
-                                        yAxisID: 'yThird',
+                                        yAxisID: thirdYAxis,
                                         tension: 0.4,
-                                        borderWidth: 3,
-                                        pointRadius: 3,
-                                        pointHoverRadius: 6
+                                        borderWidth: isBar ? 0 : 3,
+                                        pointRadius: isBar ? 0 : 3,
+                                        pointHoverRadius: isBar ? 0 : 6,
+                                        borderRadius: isBar ? 4 : 0
                                     }
                                 ]
                             },
@@ -1138,7 +1266,11 @@
                                                 let label = context.dataset.label || '';
                                                 if (label) label += ': ';
                                                 if (context.parsed.y !== null) {
-                                                    label += (context.parsed.y >= 0 ? '+' : '') + context.parsed.y.toLocaleString();
+                                                    if (activeTrendMetric === 'bet-count') {
+                                                        label += context.parsed.y.toLocaleString() + ' 次';
+                                                    } else {
+                                                        label += (context.parsed.y >= 0 ? '+' : '') + context.parsed.y.toLocaleString();
+                                                    }
                                                 }
                                                 return label;
                                             }
@@ -1150,13 +1282,14 @@
                                         display: true,
                                         position: 'left',
                                         grid: { drawOnChartArea: true, color: 'rgba(255, 255, 255, 0.05)' },
-                                        min: dateLabels.length === 7 ? -15000 : undefined,
-                                        max: dateLabels.length === 7 ? 9000 : undefined,
+                                        min: (dateLabels.length === 7 && activeTrendMetric !== 'win-loss') ? -15000 : undefined,
+                                        max: (dateLabels.length === 7 && activeTrendMetric !== 'win-loss') ? 9000 : undefined,
                                         ticks: {
                                             color: '#94a3b8',
                                             font: { size: 10 },
                                             callback: function(value) {
-                                                if (dateLabels.length === 7) {
+                                                let labelsLength = (this.chart && this.chart.data && this.chart.data.labels) ? this.chart.data.labels.length : 7;
+                                                if (labelsLength === 7 && activeTrendMetric !== 'win-loss') {
                                                     if (value === -14388) return '-1.4萬';
                                                     if (value === -6822) return '-6,822';
                                                     if (value === 744) return '744';
@@ -1170,10 +1303,10 @@
                                                 if (value <= -10000) return (value / 10000).toFixed(1) + '萬';
                                                 return value.toLocaleString();
                                             },
-                                            stepSize: dateLabels.length === 7 ? 7566 : undefined
+                                            stepSize: (dateLabels.length === 7 && activeTrendMetric !== 'win-loss') ? 7566 : undefined
                                         },
                                         afterBuildTicks: function(axis) {
-                                            if (axis.chart.data.labels.length === 7) {
+                                            if (axis.chart.data.labels.length === 7 && activeTrendMetric !== 'win-loss') {
                                                 axis.ticks = [
                                                     { value: -14388 },
                                                     { value: -6822 },
@@ -1394,6 +1527,10 @@
             function doQuery() {
                 showDashboardLoading(function() {
                     let dateRangeStr = $('#daily-date-range').val();
+                    if (dateRangeStr) {
+                        dateRangeStr = dateRangeStr.replace(' - ', ' ~ ');
+                        $('#daily-date-range').val(dateRangeStr);
+                    }
                     if (!dateRangeStr || dateRangeStr.indexOf(' ~ ') === -1) {
                         dateRangeStr = '2026-06-25 ~ 2026-07-01';
                     }
@@ -1402,7 +1539,7 @@
                     $('#dashboard-range-selector button').removeClass('active text-white').addClass('text-secondary');
                     if (dateRangeStr === '2026-06-02 ~ 2026-07-01') {
                         $('#dashboard-range-selector button[data-range="30days"]').addClass('active text-white').removeClass('text-secondary');
-                    } else if (dateRangeStr === '2026-06-25 ~ 2026-07-01') {
+                    } else {
                         $('#dashboard-range-selector button[data-range="7days"]').addClass('active text-white').removeClass('text-secondary');
                     }
 
@@ -1468,6 +1605,30 @@
             $('#daily-date-range').on('apply.daterangepicker change', function() {
                 doQuery();
             });
+
+            // Bind trend metric selector tabs (bet-amount, bet-count, win-loss)
+            $('#trend-metric-selector .trend-tab-btn').on('click', function() {
+                let metric = $(this).attr('data-metric');
+                activeTrendMetric = metric;
+                
+                // Update active state
+                $('#trend-metric-selector .trend-tab-btn').removeClass('active');
+                $(this).addClass('active');
+
+                // Update chart only
+                let dateRangeStr = $('#daily-date-range').val();
+                if (!dateRangeStr || dateRangeStr.indexOf(' ~ ') === -1) {
+                    dateRangeStr = '2026-06-25 ~ 2026-07-01';
+                }
+                updateDashboardAndCharts(dateRangeStr, true);
+            });
+
+            // 同步 daterangepicker 實例初始範圍至近 7 天
+            let picker = $('#daily-date-range').data('daterangepicker');
+            if (picker) {
+                picker.setStartDate(moment("2026-06-25", "YYYY-MM-DD").toDate());
+                picker.setEndDate(moment("2026-07-01", "YYYY-MM-DD").toDate());
+            }
 
             // Run initial query on page load
             doQuery();
