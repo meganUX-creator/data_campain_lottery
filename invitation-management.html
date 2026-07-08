@@ -326,6 +326,15 @@
     <script src="js/main.js"></script>
     <script>
         $(document).ready(function() {
+            // Dynamically assign dates to static rows to ensure we have mock data in the range
+            var rows = $('tbody tr').not('#no-data-row');
+            var offsets = [0, 1, 2, 3, 4, 5, 6]; // offsets in days from today
+            rows.each(function(index) {
+                var offset = offsets[index % offsets.length];
+                var targetDate = moment().subtract(offset, 'days').format('YYYY-MM-DD');
+                $(this).find('td:eq(0)').text(targetDate);
+            });
+
             var initialEnd = moment();
             var initialStart = moment().subtract(6, 'days');
             $('#invitation-date-range').val(initialStart.format('YYYY-MM-DD') + ' ~ ' + initialEnd.format('YYYY-MM-DD'));
@@ -334,6 +343,25 @@
                 $('#invitation-date-range').data('daterangepicker').setStartDate(initialStart);
                 $('#invitation-date-range').data('daterangepicker').setEndDate(initialEnd);
             }
+
+            // Bind daterangepicker apply event
+            $('#invitation-date-range').on('apply.daterangepicker', function(ev, picker) {
+                filterTableAndChart(picker.startDate, picker.endDate);
+            });
+
+            // Bind query button click
+            $('.btn-primary:contains("查询")').click(function() {
+                var picker = $('#invitation-date-range').data('daterangepicker');
+                if (picker) {
+                    filterTableAndChart(picker.startDate, picker.endDate);
+                } else {
+                    var val = $('#invitation-date-range').val();
+                    var parts = val.split(' ~ ');
+                    if (parts.length === 2) {
+                        filterTableAndChart(moment(parts[0], 'YYYY-MM-DD'), moment(parts[1], 'YYYY-MM-DD'));
+                    }
+                }
+            });
 
             function filterTableAndChart(start, end) {
                 var hasData = false;

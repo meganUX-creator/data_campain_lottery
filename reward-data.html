@@ -400,6 +400,15 @@
                 toast.show();
             });
 
+            // Dynamically assign dates to static rows to ensure we have mock data in the range
+            var rows = $('tbody tr:not(#no-data-row)');
+            var offsets = [0, 1, 2, 3, 4, 5, 6, 10, 15, 25]; // offsets in days from today
+            rows.each(function(index) {
+                var offset = offsets[index % offsets.length];
+                var targetDate = moment().subtract(offset, 'days').format('YYYY-MM-DD');
+                $(this).find('td:eq(0)').text(targetDate);
+            });
+
             // Add the new line chart logic
             var initialEnd = moment();
             var initialStart = moment().subtract(6, 'days');
@@ -409,6 +418,25 @@
                 $('#reward-date-range').data('daterangepicker').setStartDate(initialStart);
                 $('#reward-date-range').data('daterangepicker').setEndDate(initialEnd);
             }
+
+            // Bind daterangepicker apply event
+            $('#reward-date-range').on('apply.daterangepicker', function(ev, picker) {
+                filterTableByDateRange(picker.startDate, picker.endDate);
+            });
+
+            // Bind query button click
+            $('.btn-primary:contains("查询")').click(function() {
+                var picker = $('#reward-date-range').data('daterangepicker');
+                if (picker) {
+                    filterTableByDateRange(picker.startDate, picker.endDate);
+                } else {
+                    var val = $('#reward-date-range').val();
+                    var parts = val.split(' ~ ');
+                    if (parts.length === 2) {
+                        filterTableByDateRange(moment(parts[0], 'YYYY-MM-DD'), moment(parts[1], 'YYYY-MM-DD'));
+                    }
+                }
+            });
 
             function filterTableByDateRange(start, end) {
                 var hasData = false;
