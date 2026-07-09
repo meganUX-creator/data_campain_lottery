@@ -126,6 +126,21 @@
                             <h5 class="card-title">邀请活动管理</h5>
                         </div>
                         <div class="card-body">
+                            <!-- Filters -->
+                            <div class="d-flex align-items-center gap-3 mb-4">
+                                <div style="width: 280px;">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-calendar3"></i></span>
+                                        <input type="text" class="form-control border-start-0 ps-0" id="invitation-date-range" value="2026-06-26 ~ 2026-07-02">
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-primary px-4 shadow-sm" style="background-color: #3b82f6; border-color: #3b82f6;">
+                                        <i class="bi bi-search me-1"></i> 查询
+                                    </button>
+                                </div>
+                            </div>
+
                             <div class="mb-4">
                                 <!-- Tabs and Time Range Buttons Header -->
                                 <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
@@ -137,10 +152,6 @@
                                             <button class="nav-link" id="amount-tab" data-bs-toggle="pill" data-bs-target="#amount-chart-pane" type="button" role="tab" aria-selected="false">活动总发放金额</button>
                                         </li>
                                     </ul>
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-primary btn-sm px-3" id="btn-chart-week">近七天</button>
-                                        <button type="button" class="btn btn-outline-primary btn-sm px-3" id="btn-chart-month">近30天</button>
-                                    </div>
                                 </div>
                             
                                 <!-- Tab Contents (Charts) -->
@@ -201,21 +212,6 @@
                                     </div>
                                 </div>
                                 <div id="chart-tooltip" style="position: fixed; display: none; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 10px; border-radius: 4px; font-size: 0.75rem; pointer-events: none; z-index: 9999; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.1);"></div>
-                            </div>
-
-                            <!-- Filters -->
-                            <div class="d-flex align-items-center gap-3 mb-4">
-                                <div style="width: 280px;">
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-calendar3"></i></span>
-                                        <input type="text" class="form-control border-start-0 ps-0" id="invitation-date-range" value="2026-06-26 ~ 2026-07-02">
-                                    </div>
-                                </div>
-                                <div>
-                                    <button type="button" class="btn btn-primary px-4 shadow-sm" style="background-color: #3b82f6; border-color: #3b82f6;">
-                                        <i class="bi bi-search me-1"></i> 查询
-                                    </button>
-                                </div>
                             </div>
 
                             <div class="d-flex justify-content-end mb-3" style="font-size: 0.9rem;">
@@ -423,9 +419,139 @@
                     }
                 });
                 
-                var dates = Object.keys(dailyData).sort();
+                var startMoment = moment(start);
+                var diffDays = endMoment.diff(startMoment, 'days') + 1;
                 
-                if (dates.length === 0) {
+                var groups = [];
+                if (diffDays <= 7) {
+                    var curr = moment(startMoment);
+                    while (curr.isSameOrBefore(endMoment, 'day')) {
+                        var dStr = curr.format('YYYY-MM-DD');
+                        var data = dailyData[dStr] || { participate: 0, register: 0, valid: 0, amount: 0 };
+                        groups.push({
+                            label: curr.format('MM-DD'),
+                            tooltipLabel: dStr,
+                            participate: data.participate,
+                            register: data.register,
+                            valid: data.valid,
+                            amount: data.amount
+                        });
+                        curr.add(1, 'days');
+                    }
+                } else if (diffDays <= 30) {
+                    // Group by weekly (自然週: 週一至週日)
+                    var curr = moment(startMoment);
+                    var weekSegments = [];
+                    var currentWeek = null;
+                    var weekIdx = 1;
+                    
+                    while (curr.isSameOrBefore(endMoment, 'day')) {
+                        var dayOfWeek = curr.isoWeekday(); // 1 (Mon) to 7 (Sun)
+                        if (currentWeek === null || dayOfWeek === 1) {
+                            if (currentWeek !== null) {
+                                weekSegments.push(currentWeek);
+                                weekIdx++;
+                            }
+                            currentWeek = {
+                                weekIndex: weekIdx,
+                                start: moment(curr),
+                                end: moment(curr),
+                                days: []
+                            };
+                        }
+                        currentWeek.end = moment(curr);
+                        currentWeek.days.push(curr.format('YYYY-MM-DD'));
+                        curr.add(1, 'days');
+                    }
+                    if (currentWeek !== null) {
+                        weekSegments.push(currentWeek);
+                    }
+                    
+                    weekSegments.forEach(function(seg) {
+                        var wStart = seg.start;
+                        var wEnd = seg.end;
+                        
+                        var participate = 0, register = 0, valid = 0, amount = 0;
+                        seg.days.forEach(function(dStr) {
+                            var data = dailyData[dStr];
+                            if (data) {
+                                participate += data.participate;
+                                register += data.register;
+                                valid += data.valid;
+                                amount += data.amount;
+                            }
+                        });
+                        
+                        var isComplete = (wStart.isoWeekday() === 1 && wEnd.isoWeekday() === 7);
+                        var label = wStart.format('MM/DD') + '-' + wEnd.format('MM/DD') + '（第' + seg.weekIndex + '週）';
+                        if (!isComplete) {
+                            label += '（不完整）';
+                        }
+                        
+                        groups.push({
+                            label: label,
+                            tooltipLabel: wStart.format('YYYY-MM-DD') + ' ~ ' + wEnd.format('YYYY-MM-DD') + ' (第' + seg.weekIndex + '週)' + (!isComplete ? ' [不完整區間]' : ''),
+                            participate: participate,
+                            register: register,
+                            valid: valid,
+                            amount: amount
+                        });
+                    });
+                } else {
+                    // Group by monthly (自然月: 1號至該月最後一日)
+                    var curr = moment(startMoment);
+                    var monthSegments = [];
+                    var currentMonth = null;
+                    
+                    while (curr.isSameOrBefore(endMoment, 'day')) {
+                        var mStr = curr.format('YYYY-MM');
+                        if (currentMonth === null || currentMonth.monthStr !== mStr) {
+                            if (currentMonth !== null) {
+                                monthSegments.push(currentMonth);
+                            }
+                            currentMonth = {
+                                monthStr: mStr,
+                                start: moment(curr),
+                                end: moment(curr),
+                                days: []
+                            };
+                        }
+                        currentMonth.end = moment(curr);
+                        currentMonth.days.push(curr.format('YYYY-MM-DD'));
+                        curr.add(1, 'days');
+                    }
+                    if (currentMonth !== null) {
+                        monthSegments.push(currentMonth);
+                    }
+                    
+                    monthSegments.forEach(function(seg) {
+                        var mStart = seg.start;
+                        var mEnd = seg.end;
+                        
+                        var participate = 0, register = 0, valid = 0, amount = 0;
+                        seg.days.forEach(function(dStr) {
+                            var data = dailyData[dStr];
+                            if (data) {
+                                participate += data.participate;
+                                register += data.register;
+                                valid += data.valid;
+                                amount += data.amount;
+                            }
+                        });
+                        
+                        var label = mStart.format('MM月');
+                        groups.push({
+                            label: label,
+                            tooltipLabel: mStart.format('YYYY-MM') + ' (' + mStart.format('YYYY-MM-DD') + ' ~ ' + mEnd.format('YYYY-MM-DD') + ')',
+                            participate: participate,
+                            register: register,
+                            valid: valid,
+                            amount: amount
+                        });
+                    });
+                }
+                
+                if (groups.length === 0) {
                     $('#line-participate, #line-register, #line-valid').attr('points', '');
                     $('#points-participate, #points-register, #points-valid, #chart-x-labels-people').empty();
                     $('#bars-amount, #chart-x-labels-amount').empty();
@@ -435,10 +561,10 @@
                 var maxPeople = 0;
                 var maxAmount = 0;
                 
-                dates.forEach(function(d) {
-                    var pMax = Math.max(dailyData[d].participate, dailyData[d].register, dailyData[d].valid);
+                groups.forEach(function(g) {
+                    var pMax = Math.max(g.participate, g.register, g.valid);
                     if (pMax > maxPeople) maxPeople = pMax;
-                    if (dailyData[d].amount > maxAmount) maxAmount = dailyData[d].amount;
+                    if (g.amount > maxAmount) maxAmount = g.amount;
                 });
                 
                 maxPeople = maxPeople > 0 ? maxPeople * 1.2 : 10;
@@ -446,7 +572,7 @@
                 
                 var svgWidth = 1000;
                 var svgHeight = 160; 
-                var xStep = dates.length > 1 ? svgWidth / (dates.length - 1) : svgWidth / 2;
+                var xStep = groups.length > 1 ? svgWidth / (groups.length - 1) : svgWidth / 2;
                 
                 var ptsPart = [], ptsReg = [], ptsVal = [];
                 var cirPart = '', cirReg = '', cirVal = '';
@@ -455,16 +581,15 @@
                 var barsHtml = '';
                 var labelsHtmlAmount = '';
                 
-                var labelInterval = dates.length > 10 ? Math.ceil(dates.length / 6) : 1;
+                var labelInterval = groups.length > 10 ? Math.ceil(groups.length / 6) : 1;
                 
-                dates.forEach(function(date, index) {
-                    var xLine = dates.length > 1 ? index * xStep : xStep;
-                    var dataP = dailyData[date];
+                groups.forEach(function(g, index) {
+                    var xLine = groups.length > 1 ? index * xStep : xStep;
                     
                     // Lines (People)
-                    var yp = svgHeight - (dataP.participate / maxPeople * svgHeight);
-                    var yr = svgHeight - (dataP.register / maxPeople * svgHeight);
-                    var yv = svgHeight - (dataP.valid / maxPeople * svgHeight);
+                    var yp = svgHeight - (g.participate / maxPeople * svgHeight);
+                    var yr = svgHeight - (g.register / maxPeople * svgHeight);
+                    var yv = svgHeight - (g.valid / maxPeople * svgHeight);
                     
                     yp = Math.max(0, Math.min(yp, svgHeight));
                     yr = Math.max(0, Math.min(yr, svgHeight));
@@ -474,33 +599,32 @@
                     ptsReg.push(xLine + ',' + yr);
                     ptsVal.push(xLine + ',' + yv);
                     
-                    var rStr = dates.length > 10 ? '3' : '5';
-                    cirPart += '<circle cx="'+xLine+'" cy="'+yp+'" r="'+rStr+'" fill="#ffffff" stroke="#3b82f6" stroke-width="2"><title>'+date+' 参与:'+dataP.participate+'</title></circle>';
-                    cirReg += '<circle cx="'+xLine+'" cy="'+yr+'" r="'+rStr+'" fill="#ffffff" stroke="#10b981" stroke-width="2"><title>'+date+' 注册:'+dataP.register+'</title></circle>';
-                    cirVal += '<circle cx="'+xLine+'" cy="'+yv+'" r="'+rStr+'" fill="#ffffff" stroke="#f59e0b" stroke-width="2"><title>'+date+' 注册有效:'+dataP.valid+'</title></circle>';
+                    var rStr = groups.length > 10 ? '3' : '5';
+                    cirPart += '<circle cx="'+xLine+'" cy="'+yp+'" r="'+rStr+'" fill="#ffffff" stroke="#3b82f6" stroke-width="2"><title>'+g.tooltipLabel+' 参与:'+g.participate+'</title></circle>';
+                    cirReg += '<circle cx="'+xLine+'" cy="'+yr+'" r="'+rStr+'" fill="#ffffff" stroke="#10b981" stroke-width="2"><title>'+g.tooltipLabel+' 注册:'+g.register+'</title></circle>';
+                    cirVal += '<circle cx="'+xLine+'" cy="'+yv+'" r="'+rStr+'" fill="#ffffff" stroke="#f59e0b" stroke-width="2"><title>'+g.tooltipLabel+' 注册有效:'+g.valid+'</title></circle>';
                     
                     // Bars (Amount)
-                    var xBarStep = svgWidth / dates.length;
+                    var xBarStep = svgWidth / groups.length;
                     var xBar = index * xBarStep;
                     var barW = Math.max(5, xBarStep * 0.6); 
-                    var barH = (dataP.amount / maxAmount) * svgHeight;
+                    var barH = (g.amount / maxAmount) * svgHeight;
                     var yb = svgHeight - barH;
                     yb = Math.max(0, Math.min(yb, svgHeight));
                     
-                    barsHtml += '<rect x="'+(xBar + (xBarStep - barW)/2)+'" y="'+yb+'" width="'+barW+'" height="'+barH+'" fill="#8b5cf6" rx="4" ry="4"><title>'+date+' 金额:'+dataP.amount+'</title></rect>';
+                    barsHtml += '<rect x="'+(xBar + (xBarStep - barW)/2)+'" y="'+yb+'" width="'+barW+'" height="'+barH+'" fill="#8b5cf6" rx="4" ry="4"><title>'+g.tooltipLabel+' 金额:'+g.amount+'</title></rect>';
                     
                     // Labels
-                    if (index === 0 || index === dates.length - 1 || index % labelInterval === 0) {
-                        var lDate = moment(date).format('MM-DD');
+                    if (index === 0 || index === groups.length - 1 || index % labelInterval === 0) {
                         var leftPosLine = (xLine / svgWidth * 100);
                         var leftPosBar = ((xBar + xBarStep/2) / svgWidth * 100);
                         
                         var transLine = 'translateX(-50%)';
                         if (index === 0) transLine = 'translateX(0)';
-                        if (index === dates.length - 1) transLine = 'translateX(-100%)';
+                        if (index === groups.length - 1) transLine = 'translateX(-100%)';
                         
-                        labelsHtmlPeople += '<span style="position: absolute; left: '+leftPosLine+'%; transform: '+transLine+'; bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + lDate + '</span>';
-                        labelsHtmlAmount += '<span style="position: absolute; left: '+leftPosBar+'%; transform: translateX(-50%); bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + lDate + '</span>';
+                        labelsHtmlPeople += '<span style="position: absolute; left: '+leftPosLine+'%; transform: '+transLine+'; bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + g.label + '</span>';
+                        labelsHtmlAmount += '<span style="position: absolute; left: '+leftPosBar+'%; transform: translateX(-50%); bottom: 15px; font-size: 0.75rem; color: #94a3b8;">' + g.label + '</span>';
                     }
                 });
                 
@@ -525,34 +649,6 @@
                 });
                 $('.text-danger.fw-bold').text('总参与活动人数：'+tPart+'，总注册有效人数：'+tVal+'，总活动发放金额：'+tAmt);
             }
-            
-            $('#btn-chart-week').click(function() {
-                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
-                $('#btn-chart-month').removeClass('btn-primary').addClass('btn-outline-primary');
-                
-                var end = moment();
-                var start = moment().subtract(6, 'days');
-                $('#invitation-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
-                if ($('#invitation-date-range').data('daterangepicker')) {
-                    $('#invitation-date-range').data('daterangepicker').setStartDate(start);
-                    $('#invitation-date-range').data('daterangepicker').setEndDate(end);
-                }
-                filterTableAndChart(start, end);
-            });
-
-            $('#btn-chart-month').click(function() {
-                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
-                $('#btn-chart-week').removeClass('btn-primary').addClass('btn-outline-primary');
-                
-                var end = moment();
-                var start = moment().subtract(29, 'days');
-                $('#invitation-date-range').val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
-                if ($('#invitation-date-range').data('daterangepicker')) {
-                    $('#invitation-date-range').data('daterangepicker').setStartDate(start);
-                    $('#invitation-date-range').data('daterangepicker').setEndDate(end);
-                }
-                filterTableAndChart(start, end);
-            });
 
             // Initial load
             filterTableAndChart(initialStart, initialEnd);
